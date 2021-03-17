@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="./template_app/css/HMGet.css?r={rand}">
+
+<div class="sc-bottom-bar">
+    <a class="sc-menu-item{if $_GET['action'] == 'needsList'} sc-current{/if}"
+       href="index.php?mod=HMGet&action=needsList&from={get action}&r={uRand}" id="needsList">
+        <i class="fas fa-list"></i>
+    </a>
+    <a href="index.php?mod=HMGet&action=myRequest&from={get action}&r={uRand}" id="myRequest"
+       class="sc-menu-item{if $_GET['action'] == 'myRequest'} sc-current{/if}">
+        <i class="fas fa-hand-paper"></i>
+    </a>
+    <a class="sc-nav-indicator">
+    </a>
+    <a class="sc-menu-item{if $_GET['action'] == 'myTask'} sc-current{/if}"
+       href="index.php?mod=HMGet&action=myTask&from={get action}&r={uRand}" id="myTask">
+        <i class="fas fa-user"></i>
+    </a>
+</div>
+
+<script>
+    var menu_bar = document.querySelector('.sc-bottom-bar');
+    var menu_indicator = document.querySelector('.sc-nav-indicator');
+    var menu_current_item = document.querySelector('.sc-current');
+    var menu_position;
+
+    menu_position = menu_current_item.offsetLeft - 16;
+    menu_indicator.style.left = menu_position + "px";
+    menu_bar.style.backgroundPosition = menu_position - 8 + 'px';
+</script>
+<script src="static/js/HMGet_common.js?r={rand}"></script>

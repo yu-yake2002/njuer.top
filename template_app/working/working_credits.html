@@ -1,0 +1,29 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>积分记录</title>
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r={rand}">
+</head>
+<body>
+<!--{template app/working:common_header}-->
+<div class="working">
+    <h1 class="Reg_title">
+        积分记录
+    </h1>
+    <p>
+        注意该积分仅适用于“{$org['name']}”团队内部。
+    </p>
+    <div class="working_group_list">
+        <loop $query row_var $log>
+            <div class="working_group_cell">
+                <h3>获得积分 {$log['credits']}</h3>
+                理由: {$log['reason']}<br>
+                时间: <func formatTime>$log['time']</func>
+            </div>
+        </loop>
+    </div>
+</div>
+</body>
+</html>

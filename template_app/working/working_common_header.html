@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="./template_app/css/working.css?r={rand}">
+
+<table width="80%" align="center" style="margin: 0 auto" class="footmenu_list">
+    <tr>
+        <td align="center" width="33%">
+            <img src="static/img/dingli.png?r={rand}" class="footmenu_item{if $_GET['action'] == 'dingli'}_chosen{/if}">
+        </td>
+        <td align="center" width="33%">
+            <a href="index.php?mod=working&action=documents&oid={$org['oid']}">
+            <img src="static/img/youyue.png?r={rand}" class="footmenu_item{if $_GET['action'] == 'documents'}_chosen{/if}">
+            </a>
+        </td>
+        <td align="center" width="33%">
+            <a href="index.php?mod=working&action=index&oid={$org['oid']}">
+            <img src="static/img/lanjing.png?r={rand}" class="footmenu_item{if $_GET['action'] == 'index'}_chosen{/if}">
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" class="menu_title">
+            执行
+        </td>
+        <td align="center" class="menu_title">
+            文档
+        </td>
+        <td align="center" class="menu_title">
+            例会
+        </td>
+    </tr>
+</table>
+
+
+<div class="nav_row">
+    <a href="index.php?mod=user&action=profile&uid={$_G['user']['uid']}">
+        <img src="{$_G['user']['profile']['avatar']}" class="avatar_small">
+    </a>
+    <a href="index.php?mod=working&action=credits&oid={$org['oid']}"
+       class="nav_btn{if $_GET['action'] == 'credits'}_chosen{/if}">
+        积分: {$OrgUser['credits']}
+    </a>
+    <a href="index.php?mod=working&action=workday&oid={$org['oid']}"
+       class="nav_btn">
+        <php>$name = db_fetch(db_query("SELECT name FROM org_user_states WHERE oid = ".$org['oid']." AND state = ".$OrgUser['state']))</php>
+        部门: {$name['name']}
+    </a>
+</div>
+<br>
+<br>
+<br>

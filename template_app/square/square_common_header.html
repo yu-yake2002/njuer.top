@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="./template_app/css/square.css?r={rand}">
+
+<table width="80%" align="center" style="margin: 0 auto" class="footmenu_list">
+    <tr>
+        <td align="center" width="33%" onclick="location.href='index.php?mod=square&action=dingli&r=<?php echo rand(1,50); ?>';">
+            <img src="static/img/dingli.png?r={rand}" class="footmenu_item{if $_GET['action'] == 'dingli'}_chosen{/if}">
+        </td>
+        <td align="center" width="33%" onclick="location.href='index.php?mod=square&action=match&r=<?php echo rand(1,50); ?>';">
+            <img src="static/img/youyue.png?r={rand}" class="footmenu_item{if $_GET['action'] == 'match'}_chosen{/if}">
+            {if $_G['user']['new_mail'] > 0}<span class="new_message" style="font-size: 8px; float: left; position: absolute">New</span>{/if}
+        </td>
+        <td align="center" width="33%" onclick="location.href='index.php?mod=square&action=lanjing&r=<?php echo rand(1,50); ?>';">
+            <img src="static/img/lanjing.png?r={rand}" class="footmenu_item{if $_GET['action'] == 'lanjing'}_chosen{/if}">
+            {if $_G['user']['new_message']}<span class="new_message" style="font-size: 8px; float: left; position: absolute">New</span>{/if}
+        </td>
+    </tr>
+    <tr>
+        <td align="center" class="menu_title" onclick="location.href='index.php?mod=square&action=dingli&r=<?php echo rand(1,50); ?>';">
+            鼎里
+        </td>
+        <td align="center" class="menu_title" onclick="location.href='index.php?mod=square&action=match&r=<?php echo rand(1,50); ?>';">
+            有约
+        </td>
+        <td align="center" class="menu_title" onclick="location.href='index.php?mod=square&action=lanjing&r=<?php echo rand(1,50); ?>';">
+            消息
+        </td>
+    </tr>
+</table>

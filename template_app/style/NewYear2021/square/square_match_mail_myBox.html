@@ -1,0 +1,47 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解忧收件箱</title>
+</head>
+<body>
+<!--{template app/square:common_header}-->
+<!--{template app/square:match_mail_common}-->
+<loop $letters row_var $letter>
+    <div class="card3" onclick="location.href='index.php?mod=square&action=match&do=mail&step=letter&id={$letter['lid']}';">
+        <div class="card3_image_container">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <div class="card_title_unline">{$letter['subject']}
+                            {if $letter['read'] == 0 && $step != "mysent"}
+                            <span class="new_message" style="font-size: 8px">New</span>
+                            {/if}
+                        </div>
+                        <p class="dingli_time" style="padding-left: 12px">信件号: #{$letter['lid']} | 收件号: #{$letter['rid']}
+                            | 收信人: <func mail_show_uid>$letter['uid']</func>
+                            | 收信时间: <func formatTime>$letter['time']</func>
+                            {if $letter['read'] == 1}
+                            | <font color="#ff7f50">已读</font>
+                            {else}
+                            | 送达
+                            {/if}</p>
+                        <div class="card_contents">{$letter['abstract']}</div>
+                    </td>
+                    {if $letter['image'] > 0}
+                    <td width="30%">
+                        <func show_image_card>"{img".$letter['image']."}"</func>
+                    </td>
+                    {/if}
+                </tr>
+            </table>
+        </div>
+    </div>
+</loop>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

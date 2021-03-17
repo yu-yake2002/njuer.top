@@ -1,0 +1,38 @@
+<?php /*自动生成的模板文件_*/
+if(!defined("IS_INCLUDED")) die('Access denied!'); ?><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>南小宝 - 南大校菜</title>
+    <link rel="stylesheet" href="./template_app/css/rankList_foodList.css?r=1294">
+</head>
+<body>
+<input type="text" id="a" value="0" oninput="cal_sum();"> +
+<input type="text" id="b" value="0" oninput="cal_sum();"> =
+<input type="text" id="c" value="0" disabled>
+</body>
+<script>
+function cal_sum() {
+    var vara = document.getElementById("a").value;
+    var varb = document.getElementById("b").value;
+    if (window.XMLHttpRequest)
+    {
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById("c").value = xmlhttp.responseText;
+            //访问成功以后
+        }
+    };
+    xmlhttp.open("GET", "index.php?mod=php_api&action=rankList_food&a=" + vara + "&b=" + varb);
+    xmlhttp.send();
+}
+</script>
+</html>

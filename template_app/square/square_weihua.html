@@ -1,0 +1,34 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>炜华</title>
+</head>
+<body>
+<!--{template app/square:common_header}-->
+<div class="nav_row">
+    <a href="index.php?mod=square&action=dingli&do=New"
+       class="nav_btn{if $_GET['do'] == 'New'}_chosen{/if}">
+        最新
+    </a>
+    <a href="index.php?mod=square&action=dingli&do=Hot"
+       class="nav_btn{if $_GET['do'] == 'Hot'}_chosen{/if}">
+        周热榜
+    </a>
+    <a href="index.php?mod=square&action=dingli&do=Col"
+       class="nav_btn{if $_GET['do'] == 'Col'}_chosen{/if}">
+        收藏
+    </a>
+</div>
+<br>
+<br>
+<div id="WeiHuaList" class="weihua_list_cells"></div>
+</body>
+<script src="static/js/square_weihua_post.js?r={rand}"></script>
+<script src="static/js/square_weihua_loading.js?r={rand}"></script>
+<script src="static/js/square_weihua_operation.js?r={rand}"></script>
+<script>
+    square_WeiHuaList("type={$_GET['do']}&class={$_GET['class']}");
+</script>
+</html>

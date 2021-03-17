@@ -1,0 +1,24 @@
+
+<?php while($row = db_fetch($query2)){ ?>
+<php>$ans = db_fetch(db_query("SELECT ans FROM common_question_answer WHERE uid = ".$row['uid']))['ans']</php>
+<php>$distance = floor(square_love_like($ans, $Reg['ans']) * 50) + 50</php>
+<div class="dingli_list_cell">
+    <h4 class="dingli_title">
+        <func substr>$row['sid'], 0, 2</func>级，性格相似度:
+        {$distance}%
+        <php>$isLove = db_fetch(db_query("SELECT * FROM square_love_heart WHERE uid = ".$_G['user']['uid']." AND regid = ".$row['regid']))</php>
+        <p class="like2" onclick="square_Love({$row['regid']})">
+            💖<span id="love_{$row['regid']}">{if $isLove}已心动 <func formatTime>$isLove['time']</func>{else}心动TA{/if}</span>
+        </p>
+    </h4>
+    <div class="dingli_text">
+        <php>$row['intro'] = square_dingli_text($row['intro']."\n身高: ".$row['body_height']."cm", 0)</php>
+        <p class="dingli_text_line">{$row['intro']}</p>
+        {if $Reg['sex'] == $row['sex']}
+        <div class="watch_image_box">
+            <img class="watch_image" src="https://njuer.top/{$row['photo']}">
+        </div>
+        {/if}
+    </div>
+</div>
+<?php } ?>

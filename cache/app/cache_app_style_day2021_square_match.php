@@ -1,0 +1,266 @@
+<?php /*自动生成的模板文件_*/
+if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
+<?php include template("app_style/day2021:common:header"); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>南小宝 - 有约</title>
+    <style>
+        .btn_item_chat{
+            box-shadow: black 0 0 5px 0;
+            margin: 24px 0;
+            padding: 12px;
+            background: #da0062 url('/static/img/chat.jpg?r=3');
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 176px;
+            background-size: calc(170%);
+        }
+        .btn_title_chat{
+            border-bottom: 2px solid white;
+            margin-bottom: 12px;
+            color: white;
+            text-shadow: #0d0d0d 2px 2px 4px;
+        }
+
+        .btn_comment_chat{
+            font-size: 16px;
+            color: white;
+            font-family: "Times New Roman", "宋体";
+            text-shadow: #0d0d0d 1px 1px 2px;
+        }
+
+        .btn_comment_chat::before{
+            content: ">>";
+            font-size: 16px;
+            color: white;
+            font-family: Broadway;
+            text-shadow: #0d0d0d 1px 1px 2px;
+        }
+
+
+        .btn_item_out{
+            box-shadow: black 0 0 5px 0;
+            margin: 24px 0;
+            padding: 12px;
+            background: #315a76 url('/static/img/out.jpg');
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 176px;
+            background-size: calc(170%);
+        }
+        .btn_title_out{
+            border-bottom: 2px solid white;
+            margin-bottom: 12px;
+            color: white;
+            text-shadow: #0d0d0d 2px 2px 4px;
+        }
+
+        .btn_comment_out{
+            font-size: 14px;
+            color: white;
+            font-family: "Times New Roman", "宋体";
+            text-shadow: #0d0d0d 1px 1px 2px;
+        }
+
+        .btn_comment_out::before{
+            content: ">>";
+            font-size: 14px;
+            color: white;
+            font-family: Broadway;
+            text-shadow: #0d0d0d 1px 1px 2px;
+        }
+        .btn_item_mail{
+            box-shadow: black 0 0 5px 0;
+            margin: 24px 0;
+            padding: 12px;
+            background: #315a76 url('/static/img/mailbox.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 176px;
+            background-size: calc(170%);
+        }
+        .btn_item_study{
+            box-shadow: black 0 0 5px 0;
+            margin: 24px 0;
+            padding: 12px;
+            background: #315a76 url('/static/img/study.png?r=1');
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 126px;
+            background-size: calc(110%);
+        }
+        .btn_title_mail{
+            border-bottom: 2px solid white;
+            margin-bottom: 12px;
+            color: white;
+            text-shadow: #0d0d0d 2px 2px 4px;
+        }
+
+        .btn_comment_mail{
+            font-size: 14px;
+            color: white;
+            font-family: "Times New Roman", "宋体";
+            text-shadow: #0d0d0d 1px 1px 2px;
+        }
+
+        .btn_comment_mail::before{
+            content: ">>";
+            font-size: 14px;
+            color: white;
+            font-family: Broadway;
+            text-shadow: #0d0d0d 1px 1px 2px;
+        }
+
+        .btn_item_love{
+            box-shadow: black 0 0 5px 0;
+            margin: 24px 0;
+            padding: 12px;
+            background: #ebeae5 url('/static/img/love.jpg');
+            background-position: top right;
+            background-repeat: no-repeat;
+            height: 176px;
+            background-size: calc(120%);
+        }
+        .btn_title_love{
+            border-bottom: 2px solid white;
+            margin-bottom: 12px;
+            color: white;
+            text-shadow: darkred 2px 2px 4px;
+        }
+
+        .btn_comment_love{
+            font-size: 16px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.35);
+            padding: 6px;
+            border-radius: 12px;
+            font-family: "Times New Roman", "宋体";
+            text-shadow: darkred 1px 1px 4px;
+        }
+
+        .btn_comment_love::before{
+            content: ">>";
+            font-size: 16px;
+            color: white;
+            font-family: Broadway;
+            text-shadow: darkred 1px 1px 4px;
+        }
+    </style>
+</head>
+<body>
+<?php include template("app_style/day2021:square:common_header"); ?>
+<div class="btn_list">
+    <?php if(false){ ?>
+    <a href="javascript:;" onclick="location.href='index.php?mod=square&action=match&do=Love&r=<?php echo rand(1,50); ?>';">
+        <div class="btn_item_love">
+            <h3 class="btn_title_love">线上情侣</h3>
+            <p class="btn_comment_love">
+                本次活动将于2月4日-2月9日开放匹配，全长持续整个寒假。希望大家在寒假里能遇到一份这样妙不可言的缘，不再孤单。
+            </p>
+        </div>
+    </a>
+    <?php } ?>
+    <?php if(time() > 1639288800){ ?>
+    <div class="btn_item_mail"
+         onclick="location.href='index.php?mod=square&action=match&do=mail&r=<?php echo rand(1,50); ?>';">
+        <h3 class="btn_title_mail">解忧杂货店
+            <?php if($_G['user']['new_mail'] > 0){ ?><span class="new_message" style="font-size: 8px; float: left; position: absolute">New</span><?php } ?>
+        </h3>
+        <p class="btn_comment_mail">写下你的心事或是心愿，等待另一个人开启；走进别人的内心世界，听他的独白。
+            <?php if(time() <= 1639288800){ ?><strong>功能计划2021年12月12日14:00上线。</strong><?php } ?></p>
+    </div>
+    <?php } ?>
+    <!--<div class="btn_item_study"
+         onclick="location.href='index.php?mod=square&action=match&do=study&r=<?php echo rand(1,50); ?>';">
+        <h3 class="btn_title_out">自律小宝</h3>
+        <p class="btn_comment_out">临近期末，想要人监督学习？</p>
+        <p class="btn_comment_out">身边无大腿，没法交流学习？</p>
+        <p class="btn_comment_out">觉得孤单，自习想要人陪？</p>
+    </div>-->
+    <?php if(time() <= 1613059199){ ?>
+    <a href="index.php?mod=user&action=gift&giftid=1">
+        <img src="static/img/2021/banner.jpg" width="100%" style="border-radius: 16px">
+    </a>
+    <br>
+    <?php } ?>
+    <div class="btn_item_out"
+         onclick="location.href='index.php?mod=square&action=match&do=out&r=<?php echo rand(1,50); ?>';">
+        <h3 class="btn_title_out">组队出游</h3>
+        <p class="btn_comment_out">一起在仙林约饭、逛街看电影</p>
+        <p class="btn_comment_out">一起去打卡南京各种景点</p>
+        <p class="btn_comment_out">一起去炜华打牌、玩狼人杀</p>
+        <p class="btn_comment_out">还有更多活动由你定义，南小宝“约出游”让你的<?php echo date("m", time()); ?>月不再是一个人！</p>
+    </div>
+    <div class="btn_item<?php if($allowChat){ ?>_chat<?php } ?>"
+         onclick="<?php if($allowChat){ ?>Match_Chat();<?php }else{ ?>$.alert('现在还没有到开放时间或者人员已满哦~')<?php } ?>">
+        <h3 class="btn_title<?php if($allowChat){ ?>_chat<?php } ?>"><?php if(time() <= 1613084399){ ?>2021跨年夜聊<?php }else{ ?>小宝夜聊<?php } ?></h3>
+
+        <p class="btn_comment<?php if($allowChat){ ?>_chat<?php } ?>">
+            <?php if($allowChat){ ?>
+            点击此处即可匹配同一时间在寻求匹配的人一起聊天。
+            <?php }else{ ?>
+            现约现聊，即时匹配，为集中匹配时间，每晚19:20-19:30/20:20-20:30/21:20-21:30/22:20-24:30开放共300个名额。
+            <?php } ?>
+        </p>
+        <p class="btn_comment<?php if($allowChat){ ?>_chat<?php } ?>">
+            <?php if($allowChat){ ?>
+            在聊人数: <?php echo isset($persons)?($persons):(""); ?>/300
+            <?php }else{ ?>
+            现在还没有到开放时间哦，敬请期待！
+            <?php } ?>
+        </p>
+    </div>
+    <?php if(true){ ?>
+    <a href="javascript:;" onclick="$.alert('第二次情侣活动已经结束。')">
+        <div class="btn_item">
+            <h3 class="btn_title">情侣活动</h3>
+            <p class="btn_comment">
+                敬请期待下次活动~<br>
+            </p>
+        </div>
+    </a>
+    <?php } ?>
+    <?php if(time() <= 1639288800){ ?>
+    <div class="btn_item">
+        <h3 class="btn_title">解忧杂货店
+            <?php if($_G['user']['new_mail'] > 0){ ?><span class="new_message" style="font-size: 8px; float: left; position: absolute">New</span><?php } ?>
+        </h3>
+        <p class="btn_comment">写下你的心事或是心愿，等待另一个人开启；走进别人的内心世界，听他的独白。
+            <?php if(time() <= 1639288800){ ?><strong>功能计划2021年12月12日14:00上线。</strong><?php } ?></p>
+    </div>
+    <?php } ?>
+    <?php if($_G['user']['identification']['verified'] > 5){ ?>
+        <a href="index.php?mod=square&action=match&clear=true">
+            <div class="post_submit">
+                清空所有房间
+            </div>
+        </a>
+        <a href="index.php?mod=square&action=match&do=admin_Love">
+            <div class="post_submit">
+                审核报名
+            </div>
+        </a>
+    <a href="index.php?mod=square&action=match&do=admin_Love&times=2">
+        <div class="post_submit">
+            二次审核报名
+        </div>
+    </a>
+    <?php } ?>
+</div>
+<p align="center">
+    当前在线: <?php echo isset($_G['online']['persons'])?($_G['online']['persons']):(""); ?>人<br>最近活跃：<?php echo isset($_G['online']['user']['uid'])?($_G['online']['user']['uid']):(""); ?>(<?php echo formatTime($_G['online']['user']['square']); ?>)
+</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="FullScreen" id="Matching" onclick="cancelChatMatching();">
+    匹配中......<br>
+    点击任意位置取消匹配
+</div>
+</body>
+<script src="static/js/square_match_Chat.js?r=7334"></script>
+</html>

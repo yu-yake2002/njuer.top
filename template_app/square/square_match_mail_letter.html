@@ -1,0 +1,156 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解忧收件箱</title>
+</head>
+<body>
+<!--{template app/square:common_header}-->
+<!--{template app/square:match_mail_common}-->
+<div class="card3">
+    <div class="card2_title">
+        {$letter['title']}
+    </div>
+    <p class="card2_contents">
+        信件号: {$letter['letterid']} | 推荐人数: {$letter['vote1']}
+    </p>
+    {if $letter_received}
+    <table width="100%">
+        <tr>
+            {if $letter_received['known'] != 1 && $letter['uid'] != $_G['user']['uid']}
+            <td>
+                <div class="card2_btn" onclick="location.href='index.php?mod=square&action=match&do=mail&step=letter&id={$_GET['id']}&known=1';">
+                    希望认识
+                </div>
+            </td>
+            {/if}
+            {if $letter_received['replied'] != 1 && $letter['uid'] != $_G['user']['uid']}
+            <td>
+                <div class="card2_btn" onclick="document.getElementById('sendMail').style.display = 'block';">
+                    回复信件
+                </div>
+            </td>
+            {/if}
+        </tr>
+    </table>
+    {if $letter_received['replied'] != 1 && $letter['uid'] != $_G['user']['uid']}
+    <form action="index.php?mod=square&action=match&do=mail&step=letter&id={$_GET['id']}" method="post">
+        <div id="sendMail" style="display: none">
+            <table width="100%">
+                <tr>
+                    <td colspan="2">
+                        <input name="title" class="nxb_input" placeholder="请输入标题">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <textarea name="contents" rows="7" class="nxb_input" placeholder="请输入信件内容"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="image" class="card2">
+                            如果您要上传图片，可以点击“添加图片”选择图片后在正文中输入相应的插入代码，插入示例：“最近拍了一些猫的照片。{img31}这是数分。{img32}这是浩哥。”
+                            <div class="card2_btn" onclick="document.getElementById('file').click();">
+                                <p align="center">添加图片</p>
+                                <input type="file" id="file" hidden onchange="post_image2()">
+                            </div>
+                            <div id="image_loading"></div>
+                        </div>
+                        <input type="submit" id="submit" hidden><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <select name="allowShared" class="nxb_input">
+                            <option value="0">设为私密，禁止收件人分享</option>
+                            <option value="1" selected>允许被分享</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div class="card2_btn" onclick="document.getElementById('submit').click();">
+                <p align="center">发送回复</p>
+            </div>
+        </div>
+    </form>
+    {/if}
+    {elseif $letter["grade$grade"] && ($letter['gender'] == 0 || $letter['gender'] == $_G['user']['profile']['gender'])}
+    <div class="card2_btn" onclick="location.href='index.php?mod=square&action=match&do=mail&step=letter&id={$_GET['id']}&collect=1';">
+        收进信箱
+    </div>
+    {/if}
+    <div class="card2_contents">
+        {$letter['contents']}
+        <p align="right">
+            <func mail_show_uid>$letter['uid']</func><br>
+            <func date>"Y年m月d日", $letter['time']</func>
+        </p>
+    </div>
+    <table width="100%">
+        <tr>
+            {if $letter['allowShared'] > 0 && $letter['open'] != 1 && $letter['uid'] != $_G['user']['uid']}
+            <td>
+                <div class="card2_btn" onclick="location.href='index.php?mod=square&action=match&do=mail&step=letter&id={$_GET['id']}&share=1';">
+                    分享信件
+                </div>
+            </td>
+            {/if}
+            {if !$recommend}
+            <td>
+                <div class="card2_btn" onclick="location.href='index.php?mod=square&action=match&do=mail&step=letter&id={$_GET['id']}&recommend=1';">
+                    推荐信件
+                </div>
+            </td>
+            {/if}
+        </tr>
+    </table>
+    {if $letter_received}
+    <div class="card2_comments">
+        <h3 align="center">信件追踪</h3>
+        <p>
+            用户 <strong><func mail_show_uid>$letter['uid']</func></strong> 于<func formatTime>$letter['time']</func>发出，信件号: {$letter['letterid']}，
+            信件
+            {if $letter['allowShared'] > 0}
+            允许被分享
+            {else}
+            设置私密，禁止分享
+            {/if}
+            。
+        </p>
+        {if $letter['time'] != $letter_received['time']}
+        <p>{$letter['letterid']}号信件在
+            <func formatTime>$letter['time']</func>
+            至
+            <func formatTime>$letter_received['time']</func>
+            停留在信箱中，取信<strong>
+            {if $letter['gender'] == 0}无性别要求{/if}
+            {if $letter['gender'] == 1}要求性别为女{/if}
+            {if $letter['gender'] == 2}要求性别为男{/if}
+            </strong>
+            ，年级限于
+            <strong>
+            <var printed>0</var>
+            {if $letter['grade1'] == 1}<var printed>1</var>{$_SETTINGS['year']}级本科生{/if}
+            {if $letter['grade2'] == 1}{if $printed}、{else}<var printed>1</var>{/if}<?php echo $_SETTINGS['year'] - 1; ?>级本科生{/if}
+            {if $letter['grade3'] == 1}{if $printed}、{else}<var printed>1</var>{/if}<?php echo $_SETTINGS['year'] - 2; ?>级本科生{/if}
+            {if $letter['grade4'] == 1}{if $printed}、{else}<var printed>1</var>{/if}<?php echo $_SETTINGS['year'] - 3; ?>级本科生{/if}
+            {if $letter['grade5'] == 1}{if $printed}、{else}<var printed>1</var>{/if}<?php echo $_SETTINGS['year'] - 3; ?>级本科生以上{/if}
+            </strong>
+            中。
+        </p>
+        {/if}
+        <p>
+            用户 <strong>{$letter_received['uid']}</strong> 于 <func formatTime>$letter_received['time']</func> 取信。
+        </p>
+    </div>
+    {/if}
+</div>
+<br>
+<br>
+<br>
+<br>
+</body>
+<script src="./static/js/common_post_image.js?r={rand}"></script>
+</html>

@@ -1,0 +1,63 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>七日情侣报名</title>
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r={rand}">
+    <link rel="stylesheet" href="./template_app/css/square_match_out.css?r={rand}">
+</head>
+<body>
+<!--{template app/square:common_header}-->
+<!--{template app/square:match_love_common}-->
+
+<div class="Reg">
+    <form method="post" action="index.php?mod=square&action=match&do=Love&step=qn{if isset($_GET['reNew'])}&reNew={$_GET['reNew']}{/if}" id="RegTable">
+        <php>$i = 0</php>
+        {if $Reg['state'] == 3 || $Reg['state'] == 5 || isset($_GET['reNew'])}
+        <h1 class="Reg_title">
+            性格测试问卷
+        </h1>
+        <p class="addOut_field">
+            1. 问卷直接关系到您的匹配结果，请慎重填写；<br>
+            2. 在问卷中，每道题都会给出一句陈述，您需要根据该陈述与您的情况是否相符合答题。
+        </p>
+        <input type="hidden" name="ans_time" value="<php>echo time()</php>">
+        <loop $query row_var $question>
+            <php>$i++</php>
+            <div class="qn_back">
+                <h2 class="qn_text">{$i}. {$question['text']}</h2>
+                <span id="answer_{$question['qid']}" class="qn_ans"></span>
+                <php>$ans = json_decode($question['answer'], true)</php>
+                <foreach $ans>
+                    <a href="javascript:;"
+                       onclick="choose_ans({$question['qid']}, {$key})">
+                        <p class="qn_option">
+                            {$choice_num[$key + 2]}. {$value}
+                        </p>
+                    </a>
+                </foreach>
+                <input type="hidden" name="qid_{$question['qid']}" id="answer_input_{$question['qid']}">
+            </div>
+        </loop>
+        <div onclick="document.getElementById('submit').click()" class="post_submit">
+            完成问卷
+        </div>
+        <input type="submit" id="submit" hidden>
+    </form>
+    {else}
+    您已经完成问卷内容！
+    <a href="javascript:;"
+       onclick="location.href='index.php?mod=square&action=match&do=Love&step=qn&reNew='
+        + Math.random().toString()" style="color: #793C65">
+        重新填写
+    </a>
+    {/if}
+</div>
+<br>
+<br>
+<br><br><br>
+</body>
+<script src="static/js/square_match_love_QN.js?r={rand}"></script>
+<script src="static/js/square_match_Love_post_image.js?r={rand}"></script>
+</html>

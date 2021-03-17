@@ -1,0 +1,31 @@
+<!--{template app/common:header}-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天界面</title>
+    <link rel="stylesheet" href="./template_app/css/user_message.css?r={rand}">
+    <script>
+        var message_start = 0;
+        var message_stop = 0;
+        var message_time = 0;
+    </script>
+</head>
+<body>
+<div class="header_list" onclick="history.back();">
+    返回
+    <span style="float:right;">{$group['name']}</span>
+</div>
+<div class="message_list" id="scrollMessage">
+    <ul class="List" id="message_list">
+    </ul>
+</div>
+<div class="post_message_box">
+    <input type="text" class="post_message_input" id="message">
+    <input type="submit" class="post_message_btn" value="发送" onclick="post_message({$group['gid']});">
+</div>
+</body>
+<script src="static/js/user_room.js?r={rand}"></script>
+<script>
+    loading_message({$group['gid']});
+</script>
+</html>

@@ -1,0 +1,63 @@
+/*     CopyRight By 南小宝
+    Last Edited 20200905, By 张运筹 */
+.bg1-img{
+    background: #f7ecd8;
+    position: relative;
+    font-family: "Times New Roman", "黑体";
+}
+.login_label_ch{
+    color: #793c65;
+    font-size: 20px;
+    word-spacing: 4px;
+    font-weight: bold;
+}
+.login_label_en{
+    color: rgba(238, 194, 107, 0.5);
+    font-size: 12px;
+    word-spacing: 2px;
+    letter-spacing: 1px;
+}
+.login_field{
+    font-size: 20px;
+    background-color: white;
+    border: 0;
+    width: 90%;
+    padding: 6px 12px;
+    border-radius: 3px;
+    color: #793c65;
+    font-family: "Times New Roman";
+    letter-spacing: 2px;
+}
+.login_pass{
+    height: 36px;
+}
+
+.login_submit{
+    color: white;
+    font-size: 24px;
+    word-spacing: 16px;
+    font-weight: bold;
+    background-color: #9b4b80;
+    padding: 12px;
+    width: 80%;
+    border: 1px solid black;
+}
+
+.login_explain{
+    font-family: "宋体";
+    color: #793c65;
+    text-align: center;
+}
+.code_square{
+    font-size: 24px;
+    background-color: white;
+    border: 0;
+    width: 24px;
+    height: 24px;
+    padding: 6px;
+    border-radius: 3px;
+    text-align: center;
+    color: #793c65;
+    font-family: "Times New Roman";
+    letter-spacing: 2px;
+}

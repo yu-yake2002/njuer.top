@@ -1,0 +1,61 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地图</title>
+</head>
+<link rel="stylesheet" href="./template_app/css/map.css?r={rand}">
+<body>
+<div class="nav_row">
+    <span class="nav_btn_chosen_small">
+        室内地图
+    </span>
+</div>
+<br>
+<br>
+{if $action != "index"}
+<img src="static/img/map/{$location}{$floor}F.jpg" class="map"
+     onclick="document.getElementById('bigmap').style.display='';">
+<div id="bigmap" style="display: none; position: absolute; z-index: 100000000000; top: 0" onclick="this.style.display='none';">
+    <img src="static/img/map/{$location}{$floor}F.jpg" width="1024px">
+</div>
+
+{else}
+<div class="btn_list">
+    <div class="btn_item" onclick="location.href='index.php?mod=map&action=ifLow&floor=1';">
+        <h3 class="btn_title">逸夫楼</h3>
+        <p class="btn_comment">逸夫楼又称国际学院、左涤江楼，是南门进门以后左手边的第一栋楼，从宿舍出发去逸夫楼可走如下路线：骑车经过一组团主干道，到基础实验楼面前左转，直行到“左涤江楼”门口。</p>
+    </div>
+    <div class="btn_item" onclick="location.href='index.php?mod=map&action=xian1&floor=1';">
+        <h3 class="btn_title">仙I（择善楼）</h3>
+        <p class="btn_comment">仙I又称择善楼，在逸夫楼对面。逸夫楼位于仙I的南边，仙II位于仙I的北边。</p>
+    </div>
+    <div class="btn_item" onclick="location.href='index.php?mod=map&action=xian2&floor=1';">
+        <h3 class="btn_title">仙II（思源楼）</h3>
+        <p class="btn_comment">仙II又称思源楼，在图书馆对面。仙II有绿地毯的门为北门，和仙I相连通的那道桥是南门。</p>
+    </div>
+</div>
+{/if}
+<table class="footmenu_list">
+    <tr>
+        <td width="50%">
+            <select name="floor" onchange="location.href='index.php?mod=map&action=' + this.value + '&floor={$floor}';" class="footmenu_select">
+                <option value="ifLow" {if $location == 'ifLow'}selected{/if}>逸夫楼</option>
+                <option value="xian1" {if $location == 'xian1'}selected{/if}>仙I</option>
+                <option value="xian2" {if $location == 'xian2'}selected{/if}>仙II</option>
+            </select>
+        </td>
+        <td width="50%">
+            <select name="floor" onchange="location.href='index.php?mod=map&action={$action}&floor=' + this.value;" class="footmenu_select">
+                <option value="1" {if $floor == 1}selected{/if}>1楼</option>
+                <option value="2" {if $floor == 2}selected{/if}>2楼</option>
+                <option value="3" {if $floor == 3}selected{/if}>3楼</option>
+                <option value="4" {if $floor == 4}selected{/if}>4楼</option>
+                <option value="5" {if $floor == 5}selected{/if}>5楼</option>
+            </select>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

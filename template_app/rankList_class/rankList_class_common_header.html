@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="./template_app/css/square.css?r={rand}">
+<link rel="stylesheet" href="./template_app/css/rankList_class.css?r={rand}">
+
+<table width="80%" align="center" style="margin: 0 auto" class="footmenu_list">
+    <tr>
+        <td align="center" width="33%" onclick="location.href='index.php?mod=rankList_class&r=<?php echo rand(1,50); ?>';">
+            <img src="static/img/class_foot_logo1.png?r={rand}" class="footmenu_item">
+        </td>
+        <td align="center" width="33%" onclick="location.href='index.php?mod=myClass&r=<?php echo rand(1,50); ?>';">
+            <img src="static/img/class_foot_logo2.png?r={rand}" class="footmenu_item">
+        </td>
+        <td align="center" width="33%" onclick="location.href='index.php?mod=nju_docs&r=<?php echo rand(1,50); ?>';">
+            <img src="static/img/class_foot_logo3.png?r={rand}" class="footmenu_item">
+        </td>
+    </tr>
+    <tr>
+        <td align="center" class="menu_title" onclick="location.href='index.php?mod=rankList_class&action=dingli&r=<?php echo rand(1,50); ?>';">
+            选课指南
+        </td>
+        <td align="center" class="menu_title" onclick="location.href='index.php?mod=myClass&r=<?php echo rand(1,50); ?>';">
+            我的课程
+        </td>
+        <td align="center" class="menu_title" onclick="location.href='index.php?mod=nju_docs&r=<?php echo rand(1,50); ?>';">
+            传承南大
+        </td>
+    </tr>
+</table>
+{if isset($_GET['do']) && $_GET['do'] == "creditsLog"}
+{else}
+<div class="nav_row">
+    <a href="index.php?mod=user&action=profile&uid={$_G['user']['uid']}">
+        <img src="{$_G['user']['profile']['avatar']}" class="avatar_small">
+    </a>
+    <a href="index.php?mod=HMGet&action=needsList&do=creditsLog"
+       class="nav_btn{if $_GET['do'] == 'Wri'}_chosen{/if}_small">积分余额: {$_G['user']['credits']['credits']}</a>
+</div>
+{/if}

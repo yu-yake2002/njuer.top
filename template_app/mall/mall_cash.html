@@ -1,0 +1,22 @@
+<!--{template app/common:header}-->
+<!--{template app/mall:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>求购积分</title>
+    <link rel="stylesheet" href="./template_app/css/HMGet.css?r={rand}">
+</head>
+<body>
+<div class="card_bg">
+    <button class="HMGet_btn" onclick="ask_for_credits({$_G['user']['rest_confidence']}, {$_G['user']['credits_ask']['mobile']});">求购积分</button>
+    <div class="HMGet_content" id="Credits">
+    </div>
+</div>
+</body>
+<script src="static/js/HMGet_common.js?r={rand}"></script>
+<script src="static/js/HMGet_Credits.js?r={rand}"></script>
+<script>
+    HMGet_Credits("");
+</script>
+</html>

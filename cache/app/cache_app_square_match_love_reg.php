@@ -1,0 +1,507 @@
+<?php /*自动生成的模板文件_*/
+if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
+<?php include template("app/common:header"); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>南小宝 - 七日情侣报名</title>
+    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/love_reg.css?r=5038">
+    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/square_match_out.css?r=5038">
+</head>
+<body>
+<?php include template("app/square:common_header"); ?>
+<?php include template("app/square:match_love_common"); ?>
+
+<div class="Reg">
+    <?php if(!$Reg || $Reg['state'] == 0){ ?>
+    <h1 class="Reg_title">
+        身份验证
+    </h1>
+    <?php if(false){ ?>
+    很遗憾，由于现在已经进入限制报名阶段，您不满足待匹配库中同学的要求，无法进行匹配；如果有合适与您进行匹配的同学，我们会第一时间联系您。
+    <?php }else{ ?>
+    <div class="Reg_Photo" onclick="document.getElementById('file').click();" id="image">
+        <p class="pass">test</p>
+        <div class="Reg_Photo_Plus">+</div>
+        点击上传校园卡照片
+    </div>
+    <p class="addOut_field">
+        <font color="red">校园卡照片建议使用信息门户中的截图，如果不符合要求可能导致报名被拒绝。无法上传图片请尝试前往njuer.top更新app。</font>
+    </p>
+    <input type="file" id="file" hidden onchange="post_photo()">
+    <div class="post_submit" style="display: none" id="posting" onclick="Reg()">
+        正在识别中
+    </div>
+    <input hidden id="uploaded" value="False">
+    <?php } ?>
+    <?php }elseif($Reg['state'] == 1){ ?>
+    <h1 class="Reg_title">
+        上传生活照
+    </h1>
+    <div class="Reg_Photo" onclick="document.getElementById('file').click();" id="image">
+        <p class="pass">test</p>
+        <div class="Reg_Photo_Plus">+</div>
+        点击上传生活照
+    </div>
+    <p class="addOut_field">
+        如果您上传的生活照后期处理过于严重，照片置信度会受到一定的影响。
+    </p>
+    <input type="file" id="file" hidden onchange="post_LifePhoto()">
+    <div class="post_submit" style="display: none" id="posting" onclick="Reg()">
+        正在识别中
+    </div>
+    <input hidden id="uploaded" value="False">
+    <?php }elseif($Reg['state'] == 2){ ?>
+    <form method="post" action="index.php?mod=square&action=match&do=Love" id="RegTable">
+        <h1 class="Reg_title">
+            报名表
+        </h1>
+        <p class="addOut_field">
+            为了保证更好的匹配效果，填写报名表和完成匹配问卷会花费您约10分钟的时间。
+            <font color="red">报名表一经提交无法修改，请仔细阅读说明并认真填写。</font>
+        </p>
+        <div class="addOut_field">
+            <div class="addOut_field_label">姓名</div>
+            <input type="text" class="addOut_field_input" value="<?php echo isset($Reg['name'])?($Reg['name']):(""); ?>" name="name" placeholder="姓名，必须使用真名" id="name">
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">学号</div>
+            <input type="text" class="addOut_field_input" value="<?php echo isset($Reg['sid'])?($Reg['sid']):(""); ?>" disabled>
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">年级</div>
+            <input type="text" class="addOut_field_input" value="<?php if($isB){ ?>本科 20<?php echo substr($Reg['sid'], 0, 2); ?> 级<?php }else{ ?>研究生<?php } ?>" disabled>
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">生理性别</div>
+            <input type="text" class="addOut_field_input" value="<?php echo $Reg['sex']?"男":"女"; ?>" disabled>
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">身高</div>
+            <input type="text" class="addOut_field_input" value="<?php echo isset($Reg['body_height'])?($Reg['body_height']):(""); ?>" name="body_height" placeholder="身高(单位:cm)，保留整数" id="body_height">
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">体重</div>
+            <input type="text" class="addOut_field_input" value="" name="body_weight" placeholder="选填(单位:千克)，保留整数" id="body_weight">
+        </div>
+        <p class="addOut_field">
+            <font color="red">身高、体重直接输入数值，尾部不要带cm、kg等字样。</font>体重为选填项，即便您填写了对方也不会看到您的体重，仅作为对方BMI要求的筛选标准。
+        </p>
+        <div class="addOut_field">
+            <div class="addOut_field_label">QQ</div>
+            <input type="text" class="addOut_field_input" value="<?php echo isset($Reg['qq'])?($Reg['qq']):(""); ?>" name="qq" placeholder="能够随时接收消息的QQ" id="qq">
+        </div>
+        <p class="addOut_field">
+            请保持QQ的畅通，如果我们在活动期间24小时内未能收到你的回复，将取消您的活动资格并记录违规操作。<br>
+        </p>
+        <h1 class="Reg_title2">
+            生活照
+        </h1>
+        <div class="watch_image_box">
+            <img src="<?php echo isset($Reg['photo'])?($Reg['photo']):(""); ?>" class="watch_image">
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">颜值自评</div>
+            <input type="text" name="beauty_m" class="addOut_field_input" value="" placeholder="该项为选填项">
+        </div>
+        <a href="index.php?mod=square&action=match&do=Love&return=<?php echo rand(1, 9999999); ?>">
+            <div class="post_submit">
+                重新上传
+            </div>
+        </a>
+        <p class="addOut_field">
+            说明：您可以自由选择是否进行颜值自评（满分100分）。
+        </p>
+        <h1 class="Reg_title2">
+            校园卡照片
+        </h1>
+        <div class="watch_image_box">
+            <img src="<?php echo isset($Reg['card_pic'])?($Reg['card_pic']):(""); ?>" class="watch_image">
+        </div>
+        <p class="addOut_field">
+            在活动结束后，我们将删除您的校园卡照片，不会留作其他用途。
+        </p>
+        <h1 class="Reg_title2">
+            个人介绍与择偶标准
+        </h1>
+        <p class="addOut_field">
+            我们建议您尽可能地丰富个人介绍与择偶标准，这样能够让您更容易被别人”心动“。<br><br>
+            <textarea class="addOut_field_text2"
+                      name="intro"
+                      id="intro"
+                      placeholder="简单介绍一下你自己"
+                      oninput="document.getElementById('text_words_').innerHTML=this.value.length;
+                  document.getElementById('text_wordsCount_').style.display='block';"
+                      rows="8"><?php echo isset($Reg['intro'])?($Reg['intro']):(""); ?></textarea>
+            <span class="addOut_words_count" id="text_wordsCount_">
+            <span id="text_words_">0</span>/500
+        </span>
+        </p>
+        <h1 class="Reg_title2">
+            择偶基本标准
+        </h1>
+        <p class="addOut_field">
+            “年级”和“性取向”您均可以选择多项，如果您没有要求，可以全选。性取向一栏中，
+            <?php if($Reg['sex'] == 1){ ?>
+            如果您是异性恋，直接选择“女”即可，1、0为同性恋用语。
+            <?php }else{ ?>
+            如果您是异性恋，直接选择“男”即可，T、P为同性恋用语。
+            <?php } ?>
+            最小BMI、最大BMI如果不同时为0、999的话，未填写体重的将被筛掉。
+            年级中指的是本科年级。
+        </p>
+        <div class="addOut_field">
+            <div class="addOut_field_label">性取向</div>
+            <?php if($Reg['sex'] == 1){ ?>
+            <span class="addOut_field_option" onclick="Sex_o_choice(this, 0)">女</span>
+            <span class="addOut_field_option" onclick="Sex_o_choice(this, 1)">男(我是0)</span><br>
+            <span class="addOut_field_option" onclick="Sex_o_choice(this, 2)">男(我是1)</span>
+            <?php }else{ ?>
+            <span class="addOut_field_option" onclick="Sex_o_choice(this, 3)">男</span>
+            <span class="addOut_field_option" onclick="Sex_o_choice(this, 4)">女(我是T)</span><br>
+            <span class="addOut_field_option" onclick="Sex_o_choice(this, 5)">女(我是P)</span>
+            <?php } ?>
+            <input id="sexo" type="text" name="sexo" hidden>
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">年级</div>
+            <span class="addOut_field_option" onclick="Grade_choice(this, 0)">20级</span>
+            <span class="addOut_field_option" onclick="Grade_choice(this, 1)">19级</span>
+            <span class="addOut_field_option" onclick="Grade_choice(this, 2)">18级</span><br>
+            <span class="addOut_field_option" onclick="Grade_choice(this, 3)">17级及以上</span>
+            <input id="grade_o" type="text" name="grade_o" hidden>
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">颜值要求</div>
+            <select name="beauty_o" class="addOut_field_input" onchange="readme()" id="beauty_o">
+                <option value="0">几乎无要求，主要看性格</option>
+                <option value="1" selected>轻微颜控，但性格更重要</option>
+                <option value="2">性格不重要，只看颜值</option>
+            </select>
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">最小BMI</div>
+            <input type="text" class="addOut_field_input" name="body_weight1" placeholder="无要求可填“0”" id="body_weight1">
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">最大BMI</div>
+            <input type="text" class="addOut_field_input" name="body_weight2" placeholder="无要求可填“999”" id="body_weight2">
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">最小身高</div>
+            <input type="text" class="addOut_field_input" name="body_height1" placeholder="无要求可填“0”，单位:cm" id="body_height1">
+        </div>
+        <div class="addOut_field">
+            <div class="addOut_field_label">最大身高</div>
+            <input type="text" class="addOut_field_input" name="body_height2" placeholder="无要求可填“999”，单位:cm" id="body_height2">
+        </div>
+        <p class="addOut_field">
+            如果2月9日23:59您仍未匹配成功，我们将为您随缘匹配（单向心动优先），您是否接受？如果不接受的话，2月9日23:59您将自动退出活动。
+        </p>
+        <div class="addOut_field">
+            <div class="addOut_field_label">是否接受</div>
+            <select class="addOut_field_input" name="accept" id="accept">
+                <option value="0">不接受</option>
+                <option value="1" selected>接受</option>
+            </select>
+        </div>
+        <div class="post_submit" onclick="submit_matchLove();">
+            提交报名表
+        </div>
+    </form>
+    <?php }elseif($Reg['state'] >= 3 && $Reg['state'] < 5){ ?>
+    <h1 class="Reg_title">
+        报名表
+    </h1>
+    <p class="addOut_field">
+        小提示: <br>
+        1. 请保持QQ的畅通，如果我们在活动期间24小时内未能收到你的回复，将取消您的活动资格并记录违规操作；<br>
+        2. 后台管理人员审核报名信息仅有权查看基本信息、生活照和校园卡照片，无法看到您的性取向等匹配要求，无法看到您的体重、颜值自评。
+    </p>
+    <h1 class="Reg_title2">
+        基本信息
+    </h1>
+    <div class="addOut_field">
+        <div class="addOut_field_label">报名号</div>
+        <?php $show_regid = $Reg['regid'] - 1601; ?>
+        <p class="addOut_field_contents"><?php echo isset($show_regid)?($show_regid):(""); ?></p>
+        <div class="addOut_field_label">报名状态</div>
+        <p class="addOut_field_contents">信息审核中</p>
+        <div class="addOut_field_label">姓名</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['name'])?($Reg['name']):(""); ?></p>
+        <div class="addOut_field_label">学号</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['sid'])?($Reg['sid']):(""); ?></p>
+        <div class="addOut_field_label">年级</div>
+        <p class="addOut_field_contents"><?php if($isB){ ?>本科 20<?php echo substr($Reg['sid'], 0, 2); ?>级<?php }else{ ?>研究生<?php } ?></p>
+        <div class="addOut_field_label">生理性别</div>
+        <p class="addOut_field_contents"><?php echo $Reg['sex']?"男":"女"; ?></p>
+        <div class="addOut_field_label">身高</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['body_height'])?($Reg['body_height']):(""); ?>cm</p>
+        <div class="addOut_field_label">QQ</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['qq'])?($Reg['qq']):(""); ?></p>
+        <div class="addOut_field_label">个人介绍</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['intro'])?($Reg['intro']):(""); ?></p>
+    </div>
+    <h1 class="Reg_title2">
+        生活照
+    </h1>
+    <div class="watch_image_box">
+        <img src="<?php echo isset($Reg['photo'])?($Reg['photo']):(""); ?>" class="watch_image">
+    </div>
+    <h1 class="Reg_title2">
+        校园卡照片
+    </h1>
+    <div class="watch_image_box">
+        <img src="<?php echo isset($Reg['card_pic'])?($Reg['card_pic']):(""); ?>" class="watch_image">
+    </div>
+    <h1 class="Reg_title2">
+        择偶标准
+    </h1>
+    <div class="addOut_field_contents">
+        <div class="addOut_field_label">性取向</div>
+        <?php if(substr($Reg['sexo'], 0, 1) == 1){ ?>
+        <span class="addOut_field_option">女</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 2, 1) == 1){ ?>
+        <span class="addOut_field_option">男(我是0)</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 4, 1) == 1){ ?>
+        <span class="addOut_field_option">男(我是1)</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 6, 1) == 1){ ?>
+        <span class="addOut_field_option">男</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 8, 1) == 1){ ?>
+        <span class="addOut_field_option">女(我是T)</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 10, 1) == 1){ ?>
+        <span class="addOut_field_option">女(我是P)</span>
+        <?php } ?>
+    </div>
+    <br>
+    <div class="addOut_field_contents">
+        <div class="addOut_field_label">年级</div>
+        <?php if(substr($Reg['grade_o'], 0, 1) == 1){ ?>
+        <span class="addOut_field_option">20级</span>
+        <?php } ?>
+        <?php if(substr($Reg['grade_o'], 2, 1) == 1){ ?>
+        <span class="addOut_field_option">19级</span>
+        <?php } ?>
+        <?php if(substr($Reg['grade_o'], 4, 1) == 1){ ?>
+        <span class="addOut_field_option">18级</span><br>
+        <?php } ?>
+        <?php if(substr($Reg['grade_o'], 6, 1) == 1){ ?>
+        <span class="addOut_field_option">17级及以上</span>
+        <?php } ?>
+    </div>
+    <div class="addOut_field">
+        <div class="addOut_field_label">颜值要求</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['beauty_o'] == 0){ ?>
+            几乎无要求，主要看性格
+            <?php } ?>
+            <?php if($Reg['beauty_o'] == 1){ ?>
+            轻微颜控，但性格更重要
+            <?php } ?>
+            <?php if($Reg['beauty_o'] == 2){ ?>
+            性格不重要，只看颜值
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">最小身高</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['min_bh'] == 0){ ?>
+            不限
+            <?php }else{ ?>
+            <?php echo isset($Reg['min_bh'])?($Reg['min_bh']):(""); ?>cm
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">最大身高</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['max_bh'] == 999){ ?>
+            不限
+            <?php }else{ ?>
+            <?php echo isset($Reg['max_bh'])?($Reg['max_bh']):(""); ?>cm
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">最小BMI</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['min_bw'] == 0){ ?>
+            不限
+            <?php }else{ ?>
+            <?php echo isset($Reg['min_bw'])?($Reg['min_bw']):(""); ?>
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">最大BMI</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['max_bw'] == 999){ ?>
+            不限
+            <?php }else{ ?>
+            <?php echo isset($Reg['max_bw'])?($Reg['max_bw']):(""); ?>
+            <?php } ?>
+        </p>
+    </div>
+    <div class="addOut_field_label">报名人</div>
+    <p class="addOut_field_contents">南小宝UID: <?php echo isset($_G['user']['uid'])?($_G['user']['uid']):(""); ?></p>
+    <?php }elseif($Reg['state'] >= 5){ ?>
+    <h1 class="Reg_title">
+        活动报名表
+    </h1><!--
+    <p class="addOut_field">
+        小提示: <br>
+        1. 如果您需要系统为您进行匹配，请尽快完成问卷，越早、越认真完成问卷，您将有越高的匹配成功率；<br>
+        2. 请保持QQ的畅通，如果我们在活动期间24小时内未能收到你的回复，将取消您的活动资格并记录违规操作；<br>
+        3. 两个颜值是由一定算法基于不同审美标准给出的评分，对不同的匹配对象会适用不同的颜值评分。
+    </p>-->
+    <h1 class="Reg_title2">
+        基本信息
+    </h1>
+    <div class="addOut_field">
+        <div class="addOut_field_label">报名号</div>
+        <?php $show_regid = $Reg['regid'] - 1601; ?>
+        <p class="addOut_field_contents"><?php echo isset($show_regid)?($show_regid):(""); ?></p>
+        <div class="addOut_field_label">报名状态</div>
+        <p class="addOut_field_contents">报名成功</p>
+        <div class="addOut_field_label">姓名</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['name'])?($Reg['name']):(""); ?></p>
+        <div class="addOut_field_label">学号</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['sid'])?($Reg['sid']):(""); ?></p>
+        <div class="addOut_field_label">年级</div>
+        <p class="addOut_field_contents"><?php if($isB){ ?>本科 20<?php echo substr($Reg['sid'], 0, 2); ?>级<?php }else{ ?>研究生<?php } ?></p>
+        <div class="addOut_field_label">生理性别</div>
+        <p class="addOut_field_contents"> <?php echo $Reg['sex']?"男":"女"; ?></p>
+        <div class="addOut_field_label">身高</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['body_height'])?($Reg['body_height']):(""); ?>cm</p>
+        <div class="addOut_field_label">QQ</div>
+        <p class="addOut_field_contents"><?php echo isset($Reg['qq'])?($Reg['qq']):(""); ?></p>
+        <div class="addOut_field_label">个人介绍</div>
+        <div class="addOut_field_contents" contenteditable="true" oninput="document.getElementById('new_intro').value=this.innerHTML;">
+        <?php echo isset($Reg['intro'])?($Reg['intro']):(""); ?>
+        </div>
+        <div class="post_submit" onclick="document.getElementById('intro_submit').click()">保存修改</div>
+        <form action="index.php?mod=square&action=match&do=Love" method="post">
+            <input hidden id="new_intro" value="<?php echo strip_tags($Reg['intro']); ?>" name="new_intro">
+            <input hidden id="intro_submit" type="submit">
+        </form>
+    </div>
+    <h1 class="Reg_title2">
+        生活照
+    </h1>
+    <div class="watch_image_box" onclick="document.getElementById('file').click();" id="image">
+        <img src="<?php echo isset($Reg['photo'])?($Reg['photo']):(""); ?>" class="watch_image">
+    </div>
+    <input type="file" id="file" hidden onchange="post_LifePhoto()">
+    <div class="post_submit" style="display: none" id="posting" onclick="Reg()">
+        正在识别中
+    </div>
+    <input hidden id="uploaded" value="False">
+    <h1 class="Reg_title2">
+        择偶标准
+    </h1>
+    <div class="addOut_field_contents">
+        <div class="addOut_field_label">性取向</div>
+        <?php if(substr($Reg['sexo'], 0, 1) == 1){ ?>
+        <span class="addOut_field_option">女</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 2, 1) == 1){ ?>
+        <span class="addOut_field_option">男(我是0)</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 4, 1) == 1){ ?>
+        <span class="addOut_field_option">男(我是1)</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 6, 1) == 1){ ?>
+        <span class="addOut_field_option">男</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 8, 1) == 1){ ?>
+        <span class="addOut_field_option">女(我是T)</span>
+        <?php } ?>
+        <?php if(substr($Reg['sexo'], 10, 1) == 1){ ?>
+        <span class="addOut_field_option">女(我是P)</span>
+        <?php } ?>
+    </div>
+    <br>
+    <div class="addOut_field_contents">
+        <div class="addOut_field_label">年级</div>
+        <?php if(substr($Reg['grade_o'], 0, 1) == 1){ ?>
+        <span class="addOut_field_option">20级</span>
+        <?php } ?>
+        <?php if(substr($Reg['grade_o'], 2, 1) == 1){ ?>
+        <span class="addOut_field_option">19级</span>
+        <?php } ?>
+        <?php if(substr($Reg['grade_o'], 4, 1) == 1){ ?>
+        <span class="addOut_field_option">18级</span><br>
+        <?php } ?>
+        <?php if(substr($Reg['grade_o'], 6, 1) == 1){ ?>
+        <span class="addOut_field_option">17级及以上</span>
+        <?php } ?>
+    </div>
+    <div class="addOut_field">
+        <div class="addOut_field_label">颜值要求</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['beauty_o'] == 0){ ?>
+            几乎无要求，主要看性格
+            <?php } ?>
+            <?php if($Reg['beauty_o'] == 1){ ?>
+            轻微颜控，但性格更重要
+            <?php } ?>
+            <?php if($Reg['beauty_o'] == 2){ ?>
+            性格不重要，只看颜值
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">最小身高</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['min_bh'] == 0){ ?>
+            不限
+            <?php }else{ ?>
+            <?php echo isset($Reg['min_bh'])?($Reg['min_bh']):(""); ?>cm
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">最大身高</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['max_bh'] == 999){ ?>
+            不限
+            <?php }else{ ?>
+            <?php echo isset($Reg['max_bh'])?($Reg['max_bh']):(""); ?>cm
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">最小BMI</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['min_bw'] == 0){ ?>
+            不限
+            <?php }else{ ?>
+            <?php echo isset($Reg['min_bw'])?($Reg['min_bw']):(""); ?>
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">最大BMI</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['max_bw'] == 999){ ?>
+            不限
+            <?php }else{ ?>
+            <?php echo isset($Reg['max_bw'])?($Reg['max_bw']):(""); ?>
+            <?php } ?>
+        </p>
+        <div class="addOut_field_label">备注</div>
+        <p class="addOut_field_contents">
+            <?php if($Reg['accept'] == 1){ ?>
+            接受系统匹配
+            <?php }else{ ?>
+            不接受系统匹配
+            <?php } ?>
+        </p>
+    </div>
+    <div class="addOut_field_label">报名人</div>
+    <p class="addOut_field_contents">南小宝UID: <?php echo isset($_G['user']['uid'])?($_G['user']['uid']):(""); ?></p>
+    <?php if($Reg['editable']){ ?>
+    <a href="index.php?mod=square&action=match&do=Love&rewrite=true">
+        <div class="post_submit">重新填表</div>
+    </a>
+    <?php } ?>
+    <?php } ?>
+</div>
+<br>
+<br>
+<br><br><br>
+</body>
+<script src="static/js/square_match_love_Reg.js?r=5038"></script>
+<script src="static/js/square_match_Love_post_image.js?r=5038"></script>
+</html>

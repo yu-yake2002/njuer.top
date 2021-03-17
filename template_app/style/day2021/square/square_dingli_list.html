@@ -1,0 +1,127 @@
+<php>$i = $_GET['start']</php>
+<loop $query row_var $dingli>
+    {if !$dingli['hide']}
+    <php>$have_comments = 0</php>
+    <php>$i++</php>
+    {if !$hide_div}
+    <div class="dingli_list_cell" id="hole_cell_{$dingli['hid']}">
+        {/if}
+        <php>$dingli['text'] = square_dingli_text($dingli['text'], $dingli['reply'])</php>
+        <h4 class="dingli_title">第 {$dingli['hid']} 号投稿{if $dingli['stick'] == 1}(置顶){/if}
+            <span class="dingli_time">发表于 <php>echo date("Y-m-d H:i:s", $dingli['time'])</php></span>
+            <div class="like">
+                <a href="javascript:dingli_reply({$dingli['hid']});" class="like_btn">引用</a>
+                <a href="javascript:colDingLi({$dingli['hid']});" class="like_btn">收藏</a>
+                <a href="javascript:freshDingLi({$dingli['hid']});" class="like_btn">刷新</a>
+                <a href="javascript:repDingLi({$dingli['hid']});" class="like_btn">举报(<span id="reports_{$dingli['hid']}">{$dingli['reports']}</span>)</a>
+            </div>
+        </h4>
+        <div class="dingli_text">
+            {if $_G['user']['identification']['verified'] > 5}
+            <div class="comment_admin" id="hole_admin_{$dingli['hid']}">
+                🔒管理:
+                <a href="index.php?mod=user&action=profile&uid={$dingli['uid']}" class="like_btn">作者</a>
+                <a href="javascript:delDingLi({$dingli['hid']});" class="like_btn">删除</a>
+                <a href="javascript:creditsUpdate({$dingli['uid']});" class="like_btn">积分</a><br>
+                <a href="javascript:sendData_GET('index.php?mod=php_api&action=square&func=close&hid={$dingli['hid']}');$.alert('操作成功！');" class="like_btn">{if $dingli['closed'] == 1}解封{else}封楼{/if}</a>
+                {if $_G['user']['identification']['verified'] == 7}
+                <a href="javascript:sendData_GET('index.php?mod=php_api&action=square&func=stick&hid={$dingli['hid']}');$.alert('操作成功！');" class="like_btn">{if $dingli['stick'] == 1}取消{/if}置顶</a>
+                {/if}
+            </div>
+            {/if}
+            <p class="dingli_text_line">{$dingli['text']}</p>
+            {if $dingli['image']}
+            <div class="watch_image_box">
+                <img src="{$dingli['image']}" class="watch_image">
+            </div>
+            {/if}
+            <div class="like">
+                <p align="right" style="padding-right: 6px">
+                    {if db_fetch(db_query("SELECT likeid FROM square_hole_like WHERE uid= ".$_G['user']['uid']." AND hid=".$dingli['hid']))}
+                    <a href="javascript:zanDingLi({$dingli['hid']});"><img src="static/style_img/day2021/zaned.png?r=3" height="20px" id="zan_img_hole_{$dingli['hid']}" alt="取消赞"></a><span id="likes_{$dingli['hid']}">{$dingli['likes']}</span>
+                    {else}
+                    <a href="javascript:zanDingLi({$dingli['hid']});"><img src="static/style_img/day2021/flower.png?r=3" height="20px" id="zan_img_hole_{$dingli['hid']}" alt="点赞"></a><span id="likes_{$dingli['hid']}">{$dingli['likes']}</span>
+                    {/if}
+                    热度:{$dingli['hot']}
+                </p>
+            </div>
+            <php>$comments_query = square_dingli_comments_query($dingli['hid'])</php>
+
+            <table style="margin: 0; width: calc(100%)">
+                <tr>
+                    <td align="center" colspan="2">
+                        {if $dingli['closed'] == 1}
+                        <div class="comment_admin">
+                            🔒管理员已封楼，此帖禁止评论
+                        </div>
+                        {else}
+                        <input type="text" class="comment_text" placeholder="说点什么吧" onclick="javascript:addComment({$dingli['hid']});" oninput="javascript:addComment({$dingli['hid']});">
+                        {/if}
+                    </td>
+                </tr>
+                <php>$i = 0</php>
+                <loop $comments_query row_var $comments>
+                    {if $comments}
+                    <php>$i++</php>
+                    <tr>
+                        <td style="vertical-align: top; font-family: 'Times New Roman', '楷体'" width="100%">
+                            <font color="#303030">{$i}楼: </font> <php>echo ($comments['hide'] == 1)?"评论已被折叠":square_dingli_text($comments['text'], 0)</php>
+                            <br>
+                            {if $comments['hide'] != 1}
+                            <p align="right">
+                        <span class="dingli_time">
+                            {if $dingli['closed'] == 0}
+                            <a href="javascript:addComment({$dingli['hid']}, '回复{$i}楼: ');"><font color="#808080">回复</font></a>
+                            |{/if}
+                            {if $_G['user']['identification']['verified'] > 5}
+                            <a href="javascript:delComment({$comments['cid']});"><font color="#808080">折叠</font></a>
+                            |
+                            <a href="javascript:creditsUpdate({$comments['uid']});"><font color="#808080">积分</font></a>
+                            |
+                            {/if}
+                            发表于<php>echo date("Y-m-d H:i:s", $comments['time'])</php></span>
+                            </p>
+                            {/if}
+                        </td>
+                        <td align="center" style="vertical-align: bottom; font-size: 12px">
+                            {if $comments['hide'] != 1}<a href="javascript:zanComment({$comments['cid']});">
+                            {if db_fetch(db_query("SELECT id FROM square_comments_likes WHERE uid= ".$_G['user']['uid']." AND cid=".$comments['cid']))}
+                            <img src="static/style_img/day2021/zaned.png?r=3" height="20px" id="zan_img_comments_{$comments['cid']}" alt="取消赞">
+                            {else}
+                            <img src="static/style_img/day2021/flower.png?r=3" height="20px" id="zan_img_comments_{$comments['cid']}" alt="点赞">
+                            {/if}
+                        </a><br>
+                            <span id="likes_comments_{$comments['cid']}">{$comments['likes']}</span>{/if}
+                        </td>
+                    </tr>
+                    {/if}
+                </loop>
+                {if $i == 0}
+                <tr>
+                    <td>
+                        暂无评论
+                    </td>
+                </tr>
+                {/if}
+            </table>
+            <br>
+        </div>
+        {if !$hide_div}
+    </div>
+    <div style="text-align: center">
+    {if $_G['user']['identification']['verified'] > 5}
+    <a href="javascript:;" onclick="document.getElementById('hole_cell_{$dingli['hid']}').style.maxHeight = '9999px';
+    document.getElementById('hole_admin_{$dingli['hid']}').style.maxHeight = '900px';
+    document.getElementById('hole_admin_{$dingli['hid']}').style.padding = '3px 8px';
+    document.getElementById('hole_admin_{$dingli['hid']}').style.border = '1px red dashed';this.style.display='none';">
+        <img src="static/img/arrow_down.png" height="12px">
+    </a>
+    {else}
+    <a href="javascript:;" onclick="document.getElementById('hole_cell_{$dingli['hid']}').style.maxHeight = '9999px';this.style.display='none';">
+        <img src="static/img/arrow_down.png" height="12px">
+    </a>
+    {/if}
+    </div>
+    {/if}
+    {/if}
+</loop>

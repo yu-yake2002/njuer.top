@@ -1,0 +1,106 @@
+<?php /*自动生成的模板文件_*/
+if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
+<?php include template("app/common:header"); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>南小宝 - 我的需求</title>
+    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/HMGet_myRequest.css?r=3751">
+</head>
+<body>
+
+<div class="card front">
+    <form class="form" autocomplete="off" novalidate action="index.php?mod=mall&action=register" method="post">
+        <header>注册积分商城</header>
+        <span class="pass">
+        您需要向我们提供以下信息以使用积分商城，我们将承诺仅将您的联系方式用于：1.您购物以后，送货方与您必要的联系；2.南小宝官方需要联系您的情况（如: 出现异常操作）。
+        </span>
+        <fieldset>
+            <label>联系电话:(*)</label>
+            <input type="text" class="input-cart-number" name="tel" />
+        </fieldset>
+        <fieldset>
+            <label>QQ:(*)</label>
+            <input type="text" class="input-cart-number" name="qq" />
+        </fieldset>
+        <fieldset>
+            <label>微信号:(*)</label>
+            <input type="text" class="input-cart-number" name="vx" />
+        </fieldset>
+        <fieldset>
+            <label>宿舍楼栋:(*)</label>
+            <select class="select" name="home">
+                <option value="仙林1栋" selected>仙林1栋</option>
+                <option value="仙林2栋">仙林2栋</option>
+                <option value="仙林3栋">仙林3栋</option>
+                <option value="仙林4栋">仙林4栋</option>
+                <option value="仙林5栋">仙林5栋</option>
+                <option value="仙林6栋">仙林6栋</option>
+                <option value="仙林9栋">仙林9栋</option>
+            </select>
+        </fieldset>
+        <input hidden type="submit" id="register_submit">
+    </form>
+</div>
+<div class="button-cnt" onclick="document.getElementById('register_submit').click();">
+    <button class="secondary-cta secondary-cta--send">提交信息</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<script>
+    function readme() {
+        if(getValueById("type") == 3){
+            $.alert("如果包裹较大，我们建议您在任务描述中主动提出向接单者另外支付一定的跑腿费或者奶茶等。");
+        }
+    }
+    function sendRequest()
+    {
+        var start = getValueById("start");
+        var end = getValueById("end");
+        var time3 = getValueById("time3");
+        var time5 = getValueById("time5");
+        var mobile = getValueById("mobile");
+        var type = getValueById("type");
+        var credits = getValueById("credits");
+        var others = getValueById("others");
+        if(start == "")
+        {
+            $.alert("请填写取货地点！");
+            return false;
+        }
+        if(end == "")
+        {
+            $.alert("请填写收货地点！");
+            return false;
+        }
+        if(!/^0?1[3|4|5|6|7|8][0-9]\d{8}$/.test(mobile))
+        {
+            $.alert("请正确填写联系方式！");
+            return false;
+        }
+        if(sendData_GET("index.php?mod=php_api&action=HMGetFunc&func=AddRequest"
+            + "&start=" + start
+            + "&end=" + end
+            + "&time3=" + time3
+            + "&time5=" + time5
+            + "&mobile=" + mobile
+            + "&type=" + type
+            + "&credits=" + credits
+            + "&others=" + others)){
+            $.alert({text: "积分扣款成功后需求将被发布，您可以在“📝我的任务”中查看已发布的需求，也可以在此页面继续发布需求。",
+                onOK: function () {
+                    location.reload();
+                }});
+            return true;
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

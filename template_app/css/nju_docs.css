@@ -1,0 +1,16 @@
+.child_class{
+    width: 22%;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 1em;
+}
+
+.child_class_icon{
+    width: 48px;
+    height: 48px;
+    border-radius: 24%;
+    margin-bottom: 8px;
+}

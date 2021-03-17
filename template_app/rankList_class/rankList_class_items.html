@@ -1,0 +1,35 @@
+<!--{template app/common:header}-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我评过的课</title>
+</head>
+<body>
+<div class="bg1-img">
+    <div class="content" style="padding-bottom: 12px">
+        <div class="subcontent" id="subcontent">
+            <div id="showcontents">
+                <loop $myClass row_var $row>
+                    <php>$cid = $row['cid']</php>
+                    <php>$classinfo = db_fetch(db_query("select * from class_common where classid=$cid"))</php>
+                    {if $classinfo}
+                    <div class="content2" style="text-align: left; cursor: pointer" onclick="OpenClass('<var>classinfo['classid']</var>');">
+                        <p class="classlist-titlenav">
+                            <span class="classlist-title"><var>classinfo['name']</var></span>
+                        <hr size="1" color="white">
+                        </p>
+                        <div class="classlist-introduction">
+                            <p>课程号: <var>classinfo['num']</var>(<var>classinfo['credits']</var>学分)，授课老师: <var>classinfo['teacher']</var></p>
+                        </div>
+                    </div>
+                    {/if}
+                </loop>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="source/js/ranklist_openclass.js?r=<php>echo rand(1,9999)</php>"></script>
+</body>
+</html>

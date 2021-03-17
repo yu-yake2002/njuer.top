@@ -1,0 +1,16 @@
+<div class="nav_row">
+    <a class="nav_btn{if $action == 'index'}_chosen{/if}_small" href="index.php?mod=mall&action=index&r={uRand}">
+        商城
+    </a>
+    <a class="nav_btn{if $action == 'cash'}_chosen{/if}_small" href="index.php?mod=mall&action=cash&r={uRand}">
+        求购
+    </a>
+    <a class="nav_btn{if $action == 'history'}_chosen{/if}_small" href="index.php?mod=mall&action=history&r={uRand}">
+        订单
+    </a>
+    <span class="nav_btn_small">
+        积分: {$_G['user']['credits']['credits']}
+    </span>
+</div>
+<br>
+<br>

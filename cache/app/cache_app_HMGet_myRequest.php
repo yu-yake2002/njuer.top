@@ -1,0 +1,161 @@
+<?php /*自动生成的模板文件_*/
+if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
+<?php include template("app/common:header"); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>南小宝 - 我的需求</title>
+    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/HMGet_myRequest.css?r=1589">
+</head>
+<body>
+<?php include template("app/HMGet:common_header"); ?>
+
+<div class="card front">
+    <form class="form" autocomplete="off" novalidate>
+        <header>需求信息卡</header>
+        <fieldset>
+            <label>取货地点:(*)</label>
+            <input type="text" class="input-cart-number" id="start" />
+        </fieldset>
+        <span class="pass">
+            可选:
+            <span onclick="document.getElementById('start').value='西门';">西门</span>
+            <span onclick="document.getElementById('start').value='南门';">南门</span>
+            <span onclick="document.getElementById('start').value='22栋';">22栋</span>
+            <span onclick="document.getElementById('start').value='15栋';">15栋</span>
+        </span>
+        <fieldset>
+            <label>送达地点:(*)</label>
+            <input type="text" class="input-cart-number" id="end" />
+        </fieldset>
+        <span class="pass">
+            可选:
+            <span onclick="document.getElementById('end').value='1栋';">1栋</span>
+            <span onclick="document.getElementById('end').value='2栋';">2栋</span>
+            <span onclick="document.getElementById('end').value='3栋';">3栋</span>
+            <span onclick="document.getElementById('end').value='4栋';">4栋</span>
+            <span onclick="document.getElementById('end').value='5栋';">5栋</span>
+            <span onclick="document.getElementById('end').value='6栋';">6栋</span>
+            <span onclick="document.getElementById('end').value='9栋';">9栋</span>
+        </span>
+        <fieldset>
+            <label>联系电话:(*)</label>
+            <input type="text" class="input-cart-number" id="mobile" />
+        </fieldset>
+        <fieldset>
+            <label>接单时间:</label>
+            <select class="select" id="time3">
+                <option value="10">10 分钟内</option>
+                <option value="20">20 分钟内</option>
+                <option value="30">30 分钟内</option>
+                <option value="60" selected>1 小时内</option>
+                <option value="120">2 小时内</option>
+                <option value="240">4 小时内</option>
+                <option value="480">8 小时内</option>
+                <option value="960">24 小时内</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label>送达时间:</label>
+            <select class="select" id="time5">
+                <option value="5">接单后 5 分钟内</option>
+                <option value="10">接单后 10 分钟内</option>
+                <option value="20">接单后 20 分钟内</option>
+                <option value="30">接单后 30 分钟内</option>
+                <option value="60" selected>接单后 1 小时内</option>
+                <option value="120">接单后 2 小时内</option>
+                <option value="240">接单后 4 小时内</option>
+                <option value="480">接单后 8 小时内</option>
+                <option value="1440">接单后 24 小时内</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label>代取物件:</label>
+            <select class="select" id="type" onchange="readme()">
+                <option value="1">小件(仅一件，可以揣兜里)</option>
+                <option value="2" selected>标准件(仅一件，可单手较轻松拿取)</option>
+                <option value="3">不易拿取物件(较大、较重或者件数较多)</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label>支付积分:</label>
+            <select class="select" id="credits">
+                <option value="5">5 积分</option>
+                <option value="10">10 积分</option>
+                <option value="15">15 积分</option>
+                <option value="20" selected>20 积分</option>
+                <option value="30">30 积分</option>
+                <option value="50">50 积分</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label>任务描述:</label>
+            <input type="text" class="input-cart-number" id="others" placeholder="快递请写明取件码和姓名" />
+        </fieldset>
+        <span class="pass">
+            希望您尽量详细填写本栏，这样可以节约他人时间
+        </span>
+    </form>
+</div>
+<div class="button-cnt" onclick="sendRequest();">
+    <button class="secondary-cta secondary-cta--send">发布需求</button>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<script>
+    function readme() {
+        if(getValueById("type") == 3){
+            $.alert("如果包裹较大，我们建议您在任务描述中主动提出向接单者另外支付一定的跑腿费或者奶茶等。");
+        }
+    }
+    function sendRequest()
+    {
+        var start = getValueById("start");
+        var end = getValueById("end");
+        var time3 = getValueById("time3");
+        var time5 = getValueById("time5");
+        var mobile = getValueById("mobile");
+        var type = getValueById("type");
+        var credits = getValueById("credits");
+        var others = getValueById("others");
+        if(start == "")
+        {
+            $.alert("请填写取货地点！");
+            return false;
+        }
+        if(end == "")
+        {
+            $.alert("请填写收货地点！");
+            return false;
+        }
+        if(!/^0?1[3|4|5|6|7|8][0-9]\d{8}$/.test(mobile))
+        {
+            $.alert("请正确填写联系方式！");
+            return false;
+        }
+        if(sendData_GET("index.php?mod=php_api&action=HMGetFunc&func=AddRequest"
+            + "&start=" + start
+            + "&end=" + end
+            + "&time3=" + time3
+            + "&time5=" + time5
+            + "&mobile=" + mobile
+            + "&type=" + type
+            + "&credits=" + credits
+            + "&others=" + others)){
+            $.alert({text: "积分扣款成功后需求将被发布，您可以在“📝我的任务”中查看已发布的需求，也可以在此页面继续发布需求。",
+            onOK: function () {
+                location.reload();
+            }});
+            return true;
+        }
+        return false;
+    }
+</script>
+</body>
+</html>

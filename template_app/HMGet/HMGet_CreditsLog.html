@@ -1,0 +1,16 @@
+<loop $query row_var $log_item>
+    <div class="HMGet_sub_content">
+        <div class="title">
+            积分
+            {if $log_item['credits'] > 0}
+            +
+            {/if}
+            {$log_item['credits']}
+        </div>
+        <div class="details">
+            <p>流水号: {$log_item['lid']}</p>
+            <p>时间: <php>echo date("Y-m-d H:i:s", $log_item['time'])</php></p>
+            <p>备注: {$log_item['reason']}</p>
+        </div>
+    </div>
+</loop>

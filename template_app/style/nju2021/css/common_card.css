@@ -1,0 +1,122 @@
+body{
+    background-color: #f8f8f8;
+}
+.card_bg{
+    background-color: #f8f8f8;
+    padding-right: 6px;
+    padding-left: 6px;
+    min-height: 100%;
+}
+
+.card{
+    margin: 6px;
+    background-color: #fff;
+    padding: 12px;
+    box-shadow: #999 1px 1px 6px;
+}
+
+.card_image{
+    width: 100%;
+    border-radius: 6px;
+}
+
+.card_image_container{
+    padding: 12px;
+}
+
+.card_title{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+    padding-left: 8px;
+    border-bottom: 3px black solid;
+}
+
+.card_title_unline{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+    padding-left: 8px;
+}
+
+.card_contents{
+    margin-top: 12px;
+    font-family: "Times New Roman", "宋体";
+    text-indent: 12px;
+}
+
+.card_btn{
+    margin: 12px 24px;
+    text-align: center;
+    background-color: #3fbef3;
+    padding: 6px;
+    border-radius: 6px;
+    letter-spacing: 6px;
+    color: white;
+}
+
+.card2{
+    margin: 6px;
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 3px;
+    box-shadow: #999 1px 1px 6px;
+}
+
+.card2_image{
+    width: 100%;
+    border-radius: 6px;
+}
+
+.card3{
+    margin: 24px 12px;
+    background-color: #f7ecd8;
+    padding: 12px;
+    border-radius: 3px;
+    box-shadow: #999 1px 1px 6px;
+}
+
+.card2_image_container{
+    padding: 12px;
+}
+
+.card2_title{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+    padding-left: 8px;
+    border-bottom: 3px black solid;
+}
+
+.card2_title_unline{
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 28px;
+    padding-left: 8px;
+}
+
+.card2_contents{
+    margin-top: 12px;
+    font-family: "Times New Roman", "宋体";
+    text-indent: 12px;
+    word-break: break-all;
+}
+
+.card2_comments{
+    margin-top: 12px;
+    font-family: "Times New Roman", "宋体";
+    text-indent: 12px;
+    word-break: break-all;
+    border: 1px dashed;
+    padding: 12px 6px;
+}
+
+.card2_btn{
+    margin: 12px 24px;
+    text-align: center;
+    background-color: #793C65;
+    padding: 6px;
+    border-radius: 6px;
+    letter-spacing: 6px;
+    color: white;
+}

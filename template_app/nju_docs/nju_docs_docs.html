@@ -1,0 +1,94 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>传承南浪</title>
+</head>
+<body>
+<!--{template app/rankList_class:common_header}-->
+{if time() <= $_SETTINGS['open_time']['nju_docs1']}
+<div style="text-align: center; margin-top: 100px">
+    <img src="static/img/question.png?r={rand}" style="max-width: 100%; max-height: 70%; min-height: 60%;">
+    <h1>开甲书院答疑坊</h1>
+    <p>由于技术问题，上线时间调整至11.14 12:00</p>
+</div>
+{else}
+<?php $i = 0; ?>
+<input id='copy_url' class="nxb_input" placeholder="下载链接">
+{if $father != 1}
+<a href="index.php?mod=nju_docs&action=docs&r={rand}&father={$foler['father']}">
+    <div class="card3">
+        <font color="#808080">📂返回上级目录</font>
+    </div>
+</a>
+{else}
+<div class="card3">
+    不存在上级目录
+</div>
+{/if}
+<loop $query row_var $file>
+    {php}$i++{/php}
+    {if $file['type'] == 1}
+    <a href="index.php?mod=nju_docs&action=docs&r={rand}&father={$file['id']}">
+        <div class="card3">
+            <font color="#000">
+                <h2 class="card2_title_unline">📂{$file['name']}</h2>
+                <p class="card2_contents">查看: {$file['downloads']} | 上次更新时间: <func formatTime>$file['updateTime']</func></p>
+            </font>
+        </div>
+    </a>
+    {elseif $file['type'] == 2}
+    <div class="card3">
+        <font color="#000">
+            <h3><span class="file_type">PDF</span>{$file['name']}</h3>
+            <p class="card2_contents">上传时间: <func formatTime>$file['time']</func></p>
+            {if $file['private']}
+            <div class="card2_btn">审核中</div>
+            {else}
+            <p class="card2_contents">简介: {$file['abstract']}</p>
+            <a href="javascript:download('{$file['url']}');">
+                <div class="card2_btn">下载</div>
+            </a>
+            {/if}
+        </font>
+    </div>
+    {/if}
+</loop>
+{if $i == 0}
+<div class="card3">
+    没有找到指定目录下的文件
+</div>
+{/if}
+
+{if $folder['allowPDF']}
+<form action="index.php?mod=nju_docs&action=docs&r=3791&father={$father}" method="post">
+<div id="pdf">
+
+</div>
+</form>
+<div class="card3" onclick="document.getElementById('file').click();">
+    <p align="center"><span class="file_type">PDF</span>上传PDF文件</p>
+    <input type="file" id="file" hidden onchange="post_pdf()">
+</div>
+{/if}
+{/if}
+<br>
+<br>
+<br>
+<br>
+</body>
+<script src="./static/js/common_post_pdf.js?r={rand}"></script>
+<script>
+    function download(url){
+        document.getElementById("copy_url").value = url;
+        $.alert("已经复制到剪贴板","下载链接",
+            function () {
+                var copy_url = document.getElementById("copy_url");
+                copy_url.select();
+                document.execCommand("copy");
+            });
+        return;
+    }
+</script>
+</html>

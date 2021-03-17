@@ -1,0 +1,75 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>七日广场</title>
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r={rand}">
+    <link rel="stylesheet" href="./template_app/css/square_match_out.css?r={rand}">
+</head>
+<body>
+<!--{template app/square:common_header}-->
+<!--{template app/square:match_love_common}-->
+
+<div class="Reg">
+    <php>$i = 0</php>
+    {if $Reg['state'] <= 6 && $Reg['state'] >= 5 && $Reg['uid2'] == 0 && (time() <= $BeginAct)}
+    <h1 class="Reg_title">
+        七日广场
+    </h1>
+    <div class="dingli_list_cells">
+        <loop $query row_var $row>
+            <?php if((substr($Reg['sid'], 0, 2) == "20" && substr($row['grade_o'], 0, 1) == "1")
+        || (substr($Reg['sid'], 0, 2) == "19" && substr($row['grade_o'], 2, 1) == "1")
+        || (substr($Reg['sid'], 0, 2) == "18" && substr($row['grade_o'], 4, 1) == "1")
+        || (substr($Reg['sid'], 0, 2) != "20"
+         && substr($Reg['sid'], 0, 2) != "19"
+          && substr($Reg['sid'], 0, 2) != "18"
+           && substr($row['grade_o'], 6, 1) == "1")){ ?>
+            <div class="dingli_list_cell">
+                <h4 class="dingli_title">
+                    学号前两位：<func substr>$row['sid'], 0, 2</func>
+                    <php>$isLoved = db_fetch(db_query("SELECT * FROM square_love_heart WHERE regid = ".$Reg['regid']." AND uid = ".$row['uid']." AND `time` >= ".$BeginReg))</php>
+                    <php>$isLove = db_fetch(db_query("SELECT * FROM square_love_heart WHERE uid = ".$_G['user']['uid']." AND regid = ".$row['regid']." AND `time` >= ".$BeginReg))</php>
+                    <p class="like2">
+                        💖<span id="love_{$row['regid']}" onclick="square_Love({$row['regid']})">{if $isLove}已心动 <func formatTime>$isLove['time']</func>{else}心动TA{/if}</span>
+                        {if $isLoved && $isLove}💖
+                        <php>db_update("square_match_love_reg", array("uid2" => $row['uid']), "regid=".$Reg['regid'])</php>
+                        <php>db_update("square_match_love_reg", array("uid2" => $_G['user']['uid']), "regid=".$row['regid'])</php>
+                        <script>location.href='index.php?mod=square&action=match&do=Love&step=result&r=<?php echo rand(1, 50); ?>';</script>
+                        {/if}
+                    </p>
+                </h4>
+                <div class="dingli_text">
+                    <php>$row['intro'] = square_dingli_text($row['intro']."\n身高: ".$row['body_height']."cm\n点击下图查看照片", 0)</php>
+                    <p class="dingli_text_line">{$row['intro']}</p>
+                    <div class="watch_image_box">
+                        <img src="static/img/logo.png" onclick="this.src='https://www.njuer.top/{$row['photo']}';" class="watch_image">
+                    </div>
+                    <a href="index.php?mod=user&action=message&uid={$row['uid']}">
+                        <div class="post_submit">发起聊天</div>
+                    </a>
+                    <a href="index.php?mod=square&action=match&do=Love&step=square&pingbiid={$row['regid']}">
+                        <div class="post_submit">屏蔽</div>
+                    </a>
+                </div>
+            </div>
+            {/if}
+        </loop>
+
+
+        <div class="dingli_list_cell">
+            <div class="dingli_text">
+                已经没有更多啦~{if $Lovers > 0}（悄咪咪的告诉你，有{$Lovers}个人已经心动了你哦！）{/if}
+            </div>
+        </div>
+    </div>
+    <p align="center" style="color: #793c65">左右滑动可以查看更多</p>
+    {/if}
+</div>
+<br>
+<br>
+<br><br><br>
+</body>
+<script src="static/js/square_match_love_square.js?r={rand}"></script>
+</html>

@@ -1,0 +1,11 @@
+body{
+    background-color: #fcf6ea;
+}
+.map{
+    max-width: 100%;
+}
+.map_container{
+    position: absolute;
+    width: 100%;
+    padding: 12px;
+}

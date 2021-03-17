@@ -1,0 +1,39 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>传承南浪</title>
+</head>
+<body>
+<!--{template app/nju_docs:common}-->
+{if time() <= $_SETTINGS['open_time']['nju_docs1']}
+<div style="text-align: center; margin-top: 100px">
+    <img src="static/img/question.png?r={rand}" style="max-width: 100%; max-height: 70%; min-height: 60%;">
+    <h1>开甲书院答疑坊</h1>
+    <p>由于技术问题，上线时间调整至11.14 12:00</p>
+</div>
+{else}
+<loop $query row_var $class>
+    <div class="card2">
+        <h2 class="card2_title">{$class['name']}</h2>
+        <p class="card2_contents">授课老师: {$class['teacher']}</p>
+        <div class="card2">
+            <p align="center" id="{$class['classid']}-1" onclick="
+            this.style.display='none';document.getElementById('{$class['classid']}-2').style.display='';">点击查看课程攻略</p>
+            <div id="{$class['classid']}-2" style="display: none">
+                <p class="card2_contents">{if $class['abstract']}{$class['abstract']}{else}暂无{/if}</p>
+                <a href="index.php?mod=nju_docs&action=communication&fid=6&tid=6&r={rand}"><div class="card2_btn">补充投稿</div></a>
+                <div class="card2_btn" onclick="
+            document.getElementById('{$class['classid']}-2').style.display='none';document.getElementById('{$class['classid']}-1').style.display='';">收起</div>
+            </div>
+        </div>
+    </div>
+</loop>
+{/if}
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

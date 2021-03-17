@@ -1,0 +1,35 @@
+<table class="message_cells" width="100%">
+    <loop $query row_var $friend>
+        <php>$friend['user'] = get_user($friend['from_uid']);</php>
+        <tr onclick="location.href='index.php?mod=user&action=message&uid={$friend['from_uid']}'">
+            <td rowspan="2">
+                <a href="index.php?mod=user&action=profile&uid={$friend['from_uid']}">
+                    <img src="{$friend['user']['profile']['avatar']}" class="avatar_middle">
+                </a>
+            </td>
+            <td width="100%">
+                <a href="index.php?mod=user&action=profile&uid={$friend['from_uid']}">
+                    <font color="#c30000">{$friend['user']['common']['name']}</font>
+                </a>
+                <span style="float: right; color: #5f646e; font-size: 14px">
+                    {time $friend['time']}
+                </span>
+            </td>
+        </tr>
+        <tr onclick="location.href='index.php?mod=user&action=message&uid={$friend['from_uid']}'">
+            <td style="color: #5f646e">
+                <php>echo (strlen($friend['text']) >= 33)?substr($friend['text'], 0, 33)."...":$friend['text']</php>
+                {if $friend['toread'] > 0}
+                <span class="new_message">
+                        {$friend['toread']}
+                    </span>
+                {/if}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="background-color: #fcf6ea;height: 2px">
+
+            </td>
+        </tr>
+    </loop>
+</table>

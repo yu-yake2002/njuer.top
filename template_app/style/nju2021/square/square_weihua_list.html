@@ -1,0 +1,57 @@
+<php>$i = $_GET['start']</php>
+<loop $query row_var $dingli>
+    {if !$dingli['hide']}
+    <php>$i++</php>
+    <div class="weihua_list_cell">
+        <php>$dingli['text'] = square_dingli_text($dingli['text'], $dingli['reply'])</php>
+        <h4 class="dingli_title">第 {$dingli['hid']} 号投稿
+            <span class="dingli_time">发表于 <php>echo date("Y-m-d H:i:s", $dingli['time'])</php></span>
+            <p class="like">
+                <a href="javascript:colDingLi({$dingli['hid']});"><font color="#793c65">💖收藏</font></a>
+                <a href="javascript:dingli_reply({$dingli['hid']});"><font color="#793c65">📝回复</font></a>
+                <a href="javascript:addComment({$dingli['hid']});"><font color="#793c65">🍉评论</font></a>
+                {if $_G['user']['identification']['verified'] > 5}
+                <a href="javascript:delDingLi({$dingli['hid']});"><font color="#793c65">❎删除</font></a>
+                {else}
+                <a href="javascript:repDingLi({$dingli['hid']});"><font color="#793c65">❎举报</font></a>
+                {/if}
+                <br>
+                🔥热度:{$dingli['hot']}
+                <a href="javascript:zanDingLi({$dingli['hid']});"><font color="#793c65">👍<span id="likes_{$dingli['hid']}">{$dingli['likes']}</span></font></a>
+                举报:<span id="reports_{$dingli['hid']}">{$dingli['reports']}</span>人
+            </p>
+        </h4>
+        <div class="dingli_text">
+            <p class="dingli_text_line">{$dingli['text']}</p>
+            <php>$comments_query = square_dingli_comments_query($dingli['hid'])</php>
+            <table style="border-top: 1px solid #793c65; margin: 6px; width: calc(100% - 12px)">
+                <loop $comments_query row_var $comments>
+                    {if $comments}
+                    <php>$have_comments = 1</php>
+                    <tr>
+                        <td style="vertical-align: top" width="100%">
+                            <php>echo square_dingli_text($comments['text'], 0)</php>
+                            <span class="dingli_time">发表于<php>echo date("Y-m-d H:i:s", $comments['time'])</php></span>
+                        </td>
+                        <td align="center">
+                            <a href="javascript:zanComment({$comments['cid']});"><font color="#793c65">
+                                👍<br>
+                                <span id="likes_comments_{$comments['cid']}">{$comments['likes']}</span>
+                            </font></a>
+                        </td>
+                    </tr>
+                    {/if}
+                </loop>
+                {if !isset($have_comments)}
+                <tr>
+                    <td>
+                        暂无评论
+                    </td>
+                </tr>
+                {/if}
+            </table>
+            <br>
+        </div>
+    </div>
+    {/if}
+</loop>

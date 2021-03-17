@@ -1,0 +1,104 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>例会</title>
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r={rand}">
+    <link rel="stylesheet" href="./template_app/css/square_match_out.css?r={rand}">
+</head>
+<body>
+<!--{template app/working:common_header}-->
+<div class="working">
+    <h1 class="Reg_title">
+        会议通知
+    </h1>
+    <div class="working_group_list">
+        <php>$i = 0</php>
+        <loop $query row_var $Umeet>
+            <php>$Meet = get_meet($Umeet['meetid'])</php>
+            <php>$Meet['intro'] = str_ireplace("\n", "<br>", $Meet['intro'])</php>
+            {if $Meet}
+            <php>$i++</php>
+            <div class="working_group_cell">
+                <h2 align="center">{$Meet['name']}</h2>
+                时间：<func formatTime>$Meet['time']</func><br>
+                地点：{$Meet['place']}<br>
+                奖励积分：{$Meet['credits']}点<br>
+                {$Meet['intro']}
+                {if $Meet['state'] == 3}
+                <br>
+                签到已经结束。
+                {/if}
+                {if $Meet['state'] == 2 && $Umeet['state'] == 0}
+                <br><font color="red">请将下面的签到码告知需要签到的同学。</font>
+                <form action="index.php?mod=working&action=index&oid={$org['oid']}&sign={$Meet['meetid']}" method="post">
+                    <div class="addOut_field">
+                        <div class="addOut_field_label">签到码</div>
+                        <input type="text" class="addOut_field_input"
+                               name="key" placeholder="请输入签到码"{if $Meet['uid'] == $_G['user']['uid']} value="{$Meet['key']}"{/if}>
+                    </div>
+                    <div class="post_submit"
+                         onclick="document.getElementById('sign{$Meet['meetid']}').click();">
+                        例会签到
+                    </div>
+                    <input hidden type="submit" id="sign{$Meet['meetid']}">
+                </form>
+                {elseif $Meet['state'] == 2 && $Umeet['state'] == 2}
+                <br><font color="red">请将下面的签到码告知需要签到的同学。</font>
+                <br>签到码: {$Meet['key']}
+                {/if}
+                {if $Meet['uid'] == $_G['user']['uid']}
+                {if $Meet['state'] == 0}
+                <a href="index.php?mod=working&action=index&oid={$org['oid']}&notice={$Meet['meetid']}">
+                    <div class="post_submit">
+                        发布通知
+                    </div>
+                </a>
+                {/if}
+                {if $Meet['state'] == 1}
+                <a href="index.php?mod=working&action=index&oid={$org['oid']}&beginSign={$Meet['meetid']}">
+                    <div class="post_submit">
+                        开始签到
+                    </div>
+                </a>
+                {/if}
+                {if $Meet['state'] == 2}
+                <a href="index.php?mod=working&action=index&oid={$org['oid']}&endSign={$Meet['meetid']}">
+                    <div class="post_submit">
+                        结束签到
+                    </div>
+                </a>
+                {/if}
+                {if $Meet['state'] == 3}
+                <br>
+                <php>$persons1 = db_count(db_query("SELECT uid FROM org_meeting_sign WHERE meetid = ".$Meet['meetid']))</php>
+                <php>$person_query = db_query("SELECT name FROM org_meeting_sign WHERE state = 0 AND meetid = ".$Meet['meetid'])</php>
+                <php>$persons2 = $persons1 - db_count($person_query)</php>
+                签到结果：应到{$persons1}人，实到{$persons2}人。
+                <br>未签到名单：
+                <?php
+                $absenses = array();
+                while($absense = db_fetch($person_query)){
+                    $absenses[] = $absense['name'];
+                }
+                print(join("，", $absenses));
+                ?>。
+                <a href="index.php?mod=working&action=index&oid={$org['oid']}&beginSign={$Meet['meetid']}">
+                    <div class="post_submit">
+                        重新开始签到
+                    </div>
+                </a>
+                {/if}
+                {/if}
+
+            </div>
+            {/if}
+        </loop>
+        <if $i == 0>
+            暂时没有例会通知~
+        </if>
+    </div>
+</div>
+</body>
+</html>

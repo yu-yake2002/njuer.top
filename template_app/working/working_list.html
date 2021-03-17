@@ -1,0 +1,54 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的工作组</title>
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r={rand}">
+    <link rel="stylesheet" href="./template_app/css/square_match_out.css?r={rand}">
+</head>
+<body>
+<link rel="stylesheet" href="./template_app/css/working.css?r={rand}">
+<div class="working">
+    <p>
+        该功能正在内测中，尚未正式上线。<br>
+    </p>
+    <div class="working_group_list">
+        <div class="working_group_cell">
+            输入组织号、邀请码与姓名加入组织：
+            <form action="index.php?mod=working" method="post">
+                <div class="addOut_field">
+                    <div class="addOut_field_label">组织号</div>
+                    <input type="text" class="addOut_field_input"
+                           name="key" placeholder="请输入组织号">
+                </div>
+                <div class="addOut_field">
+                    <div class="addOut_field_label">邀请码</div>
+                    <input type="text" class="addOut_field_input"
+                           name="pwd" placeholder="请输入邀请码">
+                </div>
+                <div class="addOut_field">
+                    <div class="addOut_field_label">姓名</div>
+                    <input type="text" class="addOut_field_input"
+                           name="name" placeholder="请输入真实姓名">
+                </div>
+                <div class="post_submit"
+                     onclick="document.getElementById('sign{$Meet['meetid']}').click();">
+                    加入组织
+                </div>
+                <input hidden type="submit" id="sign{$Meet['meetid']}">
+            </form>
+        </div>
+    <loop $query row_var $user>
+        <php>$org = get_org($user['oid'])</php>
+        <a href="index.php?mod=working&action=index&oid={$org['oid']}&r={uRand}" style="color: #0d0d0d">
+            <div class="working_group_cell">
+                <h3>{$org['name']}</h3>
+                简介: {$org['intro']}
+            </div>
+        </a>
+    </loop>
+    </div>
+</div>
+</body>
+</html>

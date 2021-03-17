@@ -1,0 +1,15 @@
+<loop $query row_var $log_item>
+    <div class="HMGet_sub_content">
+        <div class="title">
+            求购 {$log_item['credits']} 积分
+        </div>
+        <div class="details">
+            <strong>求购人信息</strong>
+            <p>UID: {$log_item['uid']}</p>
+            <p>求购额度: {$log_item['confidence']}(不含VIP附加额度)</p>
+            <button class="HMGet_btn" onclick="sellCredits({$log_item['uid']}, '{$_G['user']['credits_ask']['mobile']}', {$log_item['credits']}, '{$log_item['mobile']}');">
+                售出积分
+            </button>
+        </div>
+    </div>
+</loop>

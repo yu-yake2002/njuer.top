@@ -1,0 +1,107 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>传承南大</title>
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r={rand}">
+    <link rel="stylesheet" href="./template_app/css/nju_docs.css?r={rand}">
+</head>
+<body>
+<!--{template app/rankList_class:common_header}-->
+<br>
+<br>
+<br>
+<h1 class="Reg_title3">
+    {$forum['name']}
+</h1>
+<loop $query row_var $class>
+    <div class="card3">
+        <h2 class="card2_title_unline">{$class['name']}</h2>
+        {if $class['close'] <= 0}
+        <p class="card2_contents">问题数: {$class['threads']} | 最后提问: <func formatTime>$class['time']</func></p>
+        {else}
+        <var subclass>db_query("SELECT * FROM forum_class WHERE father = ".$class['cid']." ORDER BY `order` ASC, cid DESC")</var>
+        <loop $subclass row_var $child>
+            <div class="child_class" onclick="location.href='index.php?mod=nju_docs&action=communication&fid={$child['cid']}&r={uRand}';">
+                <img src="{$child['icon']}" class="child_class_icon"><br>
+                {$child['name']}
+            </div>
+        </loop>
+        {/if}
+    </div>
+</loop>
+{if $forum['close'] <= 0}
+{if $open}
+<div class="card2_btn" onclick="location.href='index.php?mod=nju_docs&action=addThread&fid={$forum['cid']}&tid={$thread['tid']}&r={uRand}';">
+    <p align="center">回复主题</p>
+</div>
+{else}
+<div class="card2_btn" onclick="location.href='index.php?mod=nju_docs&action=addThread&fid={$forum['cid']}&r={uRand}';">
+    <p align="center">发布主题</p>
+</div>
+{/if}
+{/if}
+{if $forum['close'] <= 0 && !$open}
+<div class="card3">
+    <h2 class="card2_title_unline">内容筛选</h2>
+    <p class="card2_contents">
+        性质:
+        <a href="index.php?mod=nju_docs&action=communication&fid={$forum['cid']}&class=1&question={$question}" class="classlist-link">学术</a>
+        <a href="index.php?mod=nju_docs&action=communication&fid={$forum['cid']}&class=2&question={$question}" class="classlist-link">选课</a>
+        <a href="index.php?mod=nju_docs&action=communication&fid={$forum['cid']}&class=3&question={$question}" class="classlist-link">其他</a>
+    </p>
+    <p class="card2_contents">
+        形式:
+        <a href="index.php?mod=nju_docs&action=communication&fid={$forum['cid']}&question=1&class={$academy}" class="classlist-link">问答帖</a>
+        <a href="index.php?mod=nju_docs&action=communication&fid={$forum['cid']}&question=2&class={$academy}" class="classlist-link">分享帖</a>
+    </p>
+</div>
+{/if}
+{php}$i = 0{/php}
+<loop $query_thread row_var $post>
+    {php}$i++{/php}
+    <div class="card3"{if !$open} onclick="location.href='index.php?mod=nju_docs&action=communication&fid={$post['fid']}&tid={$post['tid']}&r={uRand}';"{/if}>
+        <h2 class="card2_title_unline">{if !$open}{$post['subject']}{else}{if $i == 1}{$thread['subject']}{else}{$i}楼{/if}{/if}</h2>
+        <p class="card2_contents">
+            {if $thread['credits'] > 0 && $i == 1}悬赏积分: {$thread['credits']} | {/if}
+            {if $post['credits'] > 0 && $open}获得积分: {$post['credits']} | {/if}
+            {if $post['credits'] > 0 && !$open}悬赏积分: {$post['credits']} | {/if}
+            {if $open}发表{else}最近更新{/if}于<func formatTime>$post['time']</func></p>
+        <hr size="1">
+    {if $post['hide'] == 1}
+    <p class="card2_contents">**该帖已经被原作者或管理员删除**</p>
+    {else}
+    <p class="card2_contents"><func show_image>$post['contents']</func></p>
+    {/if}
+
+    {if $open && $i != 1 && $thread['uid'] == $_G['user']['uid'] && $thread['credits'] > 0}
+    <div class="card2_btn" onclick="GiveCredits('{$post['pid']}', '{$thread['credits']}');">
+        <p align="center">授予积分</p>
+    </div>
+    {/if}
+    {if $post['uid'] == $_G['user']['uid']}
+    {if $open && $i != 1}
+    <div class="card2_btn" onclick="DeletePost('{$post['pid']}');">
+        <p align="center">删除</p>
+    </div>
+    {elseif $open}
+    <div class="card2_btn" onclick="DeleteThread('{$post['tid']}');">
+        <p align="center">删除</p>
+    </div>
+    {/if}
+    {/if}
+    </div>
+</loop>
+{if $i == 0 && $forum['close'] <= 0}
+<div class="card3">
+    这里还没有人发过帖哦！
+</div>
+{/if}
+<br>
+<br>
+<br>
+<br>
+</body>
+<script src="static/js/communication.js"></script>
+</html>

@@ -1,0 +1,31 @@
+<table id="window_contents" class="classlist-window_contents" height="100%" width="100%">
+    <tr>
+        <td class="classlist-window_header" id="window_contents_header" height="15%" colspan="2">
+            <font size="5"><font color="#ff7f50" id="NowStep">1</font>/1 </font>咨询课程: <var>classinfo['name']</var>
+        </td>
+    </tr>
+    <tr>
+        <td class="classlist-window_p" id="window_contents_p" height="75%" align="center" colspan="2">
+            <div>
+                <input id="AskCid" type="hidden" value="<var>classinfo['classid']</var>">
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <textarea class="weui-textarea" placeholder="请输入您想咨询的具体问题" rows="3" id="question" maxlength="400"
+                                      oninput="document.getElementById('question_words').innerHTML=this.value.length"></textarea>
+                            <div class="weui-textarea-counter"><span id="question_words">0</span>/400</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="classlist-window_btn">
+        <td height="10%" align="center" width="50%" class="classlist-window_btn1">
+            <a href="javascript:;" onclick="CloseClassWindow();" id="classlist-window_btn1" class="classlist-window_btn1_font">关闭</a>
+        </td>
+        <td align="center" width="50%" class="classlist-window_btn2">
+            <a href="javascript:;" onclick="PostAsk();" id="classlist-window_btn2" class="classlist-window_btn2_font">发送咨询</a>
+        </td>
+    </tr>
+</table>

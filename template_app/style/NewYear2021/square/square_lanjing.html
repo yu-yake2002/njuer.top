@@ -1,0 +1,135 @@
+<!--{template app_style/NewYear2021:common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消息列表</title>
+</head>
+<body>
+<!--{template app_style/NewYear2021:square:common_header}-->
+<div class="nav_row">
+    <a href="index.php?mod=user&action=profile&uid={$_G['user']['uid']}">
+        <img src="{$_G['user']['profile']['avatar']}" class="avatar_small">
+    </a>
+    <a href="index.php?mod=square&action=lanjing&do=Message"
+       class="nav_btn{if $_GET['do'] == 'Message'}_chosen{/if}">
+        我的消息
+    </a>
+    <a href="index.php?mod=square&action=lanjing&do=Attention"
+       class="nav_btn{if $_GET['do'] == 'Attention'}_chosen{/if}">
+        我的关注
+    </a>
+    <a href="javascript:$.prompt({text:'请输入uid', onOK:function(uid) {
+      location.href='index.php?mod=user&action=profile&uid=' + uid;
+    }});"
+       class="nav_btn">
+        UID找人
+    </a>
+</div>
+<br>
+<br>
+<br>
+{if $_GET['do'] == 'Message'}
+<a href="index.php?mod=user&action=message&uid=10000">
+    <p class="message_list" align="center" style="background-color: #f7f7fa">
+        <font color="#808080">联系客服</font>
+    </p>
+</a>
+<div id="messageBox"></div>
+{else}
+<div id="AttentionList">
+    <loop $attentions row_var $attention>
+        <php>$avatar = db_fetch(db_query("SELECT avatar FROM user_profile WHERE uid = ".$attention['attention']))['avatar']</php>
+        <php>$avatar = $avatar?$avatar:"data/avatar/common.png"</php>
+        <a href="index.php?mod=user&action=profile&uid={$attention['attention']}"><img src="{$avatar}" class="avatar_middle"
+                                                                                       style="padding: 16px"></a>
+    </loop>
+</div>
+{/if}
+<br>
+<br>
+<br>
+</body>
+{if $_GET['do'] == 'Message'}
+<script src="static/js/GetMessage.js?r={rand}"></script>
+<script>
+    var ws;
+    var lockReconnect = false;
+    var lockConnect = 0;
+    function createWebSocket(){
+        lockConnect++;
+        if(lockConnect >= 5){
+            $.alert({text: "连接失败", onOK: function(){
+                    lockConnect = 0;
+                    ws = new WebSocket("wss://chat.njuer.top");
+                    ws.binaryType='arraybuffer';
+                    websocketInit();
+                }});
+        }else {
+            ws = new WebSocket("wss://chat.njuer.top");
+            websocketInit();
+        }
+    }
+
+    function websocketInit () {
+        // 建立 web socket 连接成功触发事件
+        ws.onopen = function (evt) {
+            onOpen(evt);
+        };
+        // 断开 web socket 连接成功触发事件
+        ws.onclose = function (evt) {
+            websocketReconnect("wss://chat.njuer.top");
+        };
+        // 接收服务端数据时触发事件
+        ws.onmessage = function (evt) {
+            onMessage(evt);
+        };
+        // 通信发生错误时触发
+        ws.onerror = function (evt) {
+            websocketReconnect("wss://chat.njuer.top");
+        };
+    };
+
+    function onOpen(evt) {
+        ws.send("{$_G['user']['uid']},-2,{$token}");
+        heartCheck.start();
+    }
+
+    function onMessage(data) {
+        heartCheck.start();
+        GetMessage();
+    }
+
+    function websocketReconnect(url) {
+        if (lockReconnect) {       // 是否已经执行重连
+            return;
+        };
+        lockReconnect = true;
+
+        createWebSocket(url);
+        setTimeout(function () {
+            lockReconnect = false;
+        }, 1000);
+    }
+
+    var heartCheck = {
+        timeout: 30000,
+        timeoutObj: null,
+        serverTimeoutObj: null,
+        start: function () {
+            var self = this;
+            this.timeoutObj && clearTimeout(this.timeoutObj);
+            this.serverTimeoutObj && clearTimeout(this.serverTimeoutObj);
+            this.timeoutObj = setTimeout(function () {
+                ws.send("1");
+                self.serverTimeoutObj = setTimeout(function () {
+                    ws.close();
+                }, self.timeout);
+            }, this.timeout);
+        }
+    }
+
+    createWebSocket();
+</script>
+{/if}
+</html>

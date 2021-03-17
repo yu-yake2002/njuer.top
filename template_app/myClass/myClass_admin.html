@@ -1,0 +1,56 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程管理</title>
+</head>
+<body>
+<!--{template app/rankList_class:common_header}-->
+<br>
+<br>
+<br>
+<div class="weui-cell">
+    <div class="weui-cell__bd" style="color: #793c65">
+        <strong><var>classinfo['name']</var></strong>
+    </div>
+</div>
+<div class="form-table">
+    <table align="center">
+        <tr>
+            <td width="125px">课程讨论区</td>
+            <td><select class="nxb_input" style="width: 200px" name="forum"
+                        onchange="if(this.value == '-1') { $.alert('24小时内客服将与您取得联系，请保持南小宝消息畅通。'); }
+                        set_class('forum', this.value, '{$classinfo['classid']}');">
+                <option value="0" {if $classinfo['forum'] == 0}selected{/if}>不设讨论区</option>
+                <option value="-1" {if $classinfo['forum'] == -1}selected{/if}>申请新设讨论区</option>
+                <loop $forums row_var $folder>
+                <option value="{$forum['cid']}" {if $classinfo['forum'] == $forum['cid']}selected{/if}>{$forum['name']}</option>
+                </loop>
+            </select></td>
+        </tr>
+        <tr>
+            <td width="125px">课程学习经验</td>
+            <td><textarea class="nxb_input" style="width: 200px" rows="5"
+                          onchange="set_class('experience', this.value, '{$classinfo['classid']}');">{$classinfo['experience']}</textarea></td>
+        </tr>
+        <tr>
+            <td width="125px">编辑通知</td>
+            <td><textarea class="nxb_input" style="width: 200px" id="msg" rows="5" placeholder="请在这里编辑通知"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="card2_btn" onclick="send_msg('{$classinfo['classid']}');">
+                    <p align="center">群发通知</p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<br>
+<br>
+<br>
+</body>
+<script src="static/js/send_msg.js?r={rand}"></script>
+<script src="static/js/myClass_admin.js?r={rand}"></script>
+</html>
