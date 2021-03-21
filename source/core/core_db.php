@@ -70,7 +70,7 @@
             }catch (Exception $error){
 
             }
-                $query->close();
+            $query->close();
         }
         return 0;
         //print $sql;

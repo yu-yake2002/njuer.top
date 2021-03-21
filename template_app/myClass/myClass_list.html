@@ -31,6 +31,9 @@
             <p>课程学习经验: <func str_ireplace>"\n", "</p><p>", $classinfo['experience']</func></p>
             {/if}
             <p style="padding-top: 6px">
+                {if $classinfo['classtype'] == 4 || $classinfo['classtype'] == 5 || $classinfo['classtype'] == 7}
+                <a href="index.php?mod=myClass&action=findFriend" class="classlist-link">以课会友</a>
+                {/if}
                 {if !$classinfo['admin']}
                 <a href="javascript:;" class="classlist-link" onclick="ApplyAdmin('{$classinfo['classid']}', '{$classinfo['name']}')">申请课程管理员</a>
                 {elseif $classinfo['admin'] == $_G['user']['uid']}

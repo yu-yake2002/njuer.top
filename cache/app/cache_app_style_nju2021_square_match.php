@@ -265,5 +265,5 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
     点击任意位置取消匹配
 </div>
 </body>
-<script src="static/js/square_match_Chat.js?r=5263"></script>
+<script src="static/js/square_match_Chat.js?r=2860"></script>
 </html>

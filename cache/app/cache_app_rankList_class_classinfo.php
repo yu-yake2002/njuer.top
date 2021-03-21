@@ -184,8 +184,8 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
         background-color: #fcf6ea;
     }
 </style>
-<link rel="stylesheet" href="./template_app/css/rankList_class.css?r=1737">
-<script src="static/js/class_remark.js?r=1737"></script>
+<link rel="stylesheet" href="./template_app/css/rankList_class.css?r=168">
+<script src="static/js/class_remark.js?r=168"></script>
 <div class="weui-cell">
     <div class="weui-cell__bd" style="color: #793c65">
         <strong><?php echo isset($classinfo['name'])?($classinfo['name']):("var[classinfo['name']]"); ?></strong>

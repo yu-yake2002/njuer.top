@@ -6,7 +6,7 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <head>
     <meta charset="UTF-8">
     <title>南小宝 - 我的课程</title>
-    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=1495">
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=3102">
 </head>
 <body>
 <?php include template("app/rankList_class:common_header"); ?>
@@ -33,6 +33,9 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
             <p>课程学习经验: <?php echo str_ireplace("\n", "</p><p>", $classinfo['experience']); ?></p>
             <?php } ?>
             <p style="padding-top: 6px">
+                <?php if($classinfo['classtype'] == 4 || $classinfo['classtype'] == 5 || $classinfo['classtype'] == 7){ ?>
+                <a href="index.php?mod=myClass&action=findFriend" class="classlist-link">以课会友</a>
+                <?php } ?>
                 <?php if(!$classinfo['admin']){ ?>
                 <a href="javascript:;" class="classlist-link" onclick="ApplyAdmin('<?php echo isset($classinfo['classid'])?($classinfo['classid']):(""); ?>', '<?php echo isset($classinfo['name'])?($classinfo['name']):(""); ?>')">申请课程管理员</a>
                 <?php }elseif($classinfo['admin'] == $_G['user']['uid']){ ?>
@@ -58,5 +61,5 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <br>
 <br>
 </body>
-<script src="static/js/class_join.js?r=1495"></script>
+<script src="static/js/class_join.js?r=3102"></script>
 </html>

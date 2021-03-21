@@ -44,6 +44,7 @@ function add_class($num, $name, $credits, $teacher, $array=array())
     return 1;
 }
 
+
 function class_total($array, $credits=0)
 {
     $item = array(

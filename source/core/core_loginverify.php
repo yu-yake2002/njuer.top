@@ -9,6 +9,7 @@
         die('Access denied!');
     }
 
+
     $_G['user']['loginned'] = false;
     if(isset($_COOKIE["key"]))
     {
@@ -49,13 +50,6 @@
         }else{
             $_G['user']['loginned'] = false;
         }
-    }
-    if(defined("DEBUG")) {
-        $query = db_query(
-            "select * from common_user_sign where uid = 10004"
-        );
-        $_G['user'] = db_fetch($query);
-        $_G['user']['loginned'] = true;
     }
     if($_G['user']['loginned']){
         $query = db_query(

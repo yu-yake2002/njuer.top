@@ -16,10 +16,10 @@
         //api的key和secret
 
         'db' => array(
-            'host' => "hdm721902126.my3w.com", //请填写数据库地址
-            'user' => "hdm721902126", //请填写数据库用户名
-            'pwd' => "DC7F66-5c07462a", //请填写数据库密码
-            'dbname' => "hdm721902126_db" //请填写数据库名
+            'host' => "localhost", //请填写数据库地址
+            'user' => "yuyake", //请填写数据库用户名
+            'pwd' => "temppwd", //请填写数据库密码
+            'dbname' => "nanxiaobao" //请填写数据库名
         ),
         //数据库的相关配置
 

@@ -8,7 +8,7 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 </head>
 <body>
 <?php include template("app/square:common_header"); ?>
-<link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/square_match_out.css?r=1224">
+<link rel="stylesheet" href="./template_app/css/square_match_out.css?r=7708">
 <div class="nav_row">
     <a href="index.php?mod=square&action=match&do=out"
        class="nav_btn">

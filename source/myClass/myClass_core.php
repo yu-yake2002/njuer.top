@@ -19,7 +19,7 @@ if(!isset($_GET['action'])) {
 }
 
 if(!in_array($_GET['action'], array(
-    'list', 'findFriend', 'admin'
+    'list', 'findFriend', 'admin', 'addFindFriend', 'myFindFriend',
 ))) {
     $action = "list";
 }else{

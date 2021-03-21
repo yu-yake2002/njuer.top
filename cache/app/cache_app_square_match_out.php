@@ -8,8 +8,8 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 </head>
 <body>
 <?php include template("app/square:common_header"); ?>
-<link rel="stylesheet" href="./template_app/css/square_match_out.css?r=9564">
-<link rel="stylesheet" href="./template_app/css/HMGet.css?r=9564">
+<link rel="stylesheet" href="./template_app/css/square_match_out.css?r=8141">
+<link rel="stylesheet" href="./template_app/css/HMGet.css?r=8141">
 <div class="nav_row">
     <a href="index.php?mod=user&action=profile&uid=<?php echo isset($_G['user']['uid'])?($_G['user']['uid']):(""); ?>">
         <img src="<?php echo isset($_G['user']['profile']['avatar'])?($_G['user']['profile']['avatar']):(""); ?>" class="avatar_small">

@@ -5,10 +5,10 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <html lang="en">
 <head>
     <title>南小宝 - 登录界面</title>
-    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/user_login.css?r=7991">
+    <link rel="stylesheet" href="./template_app/css/user_login.css?r=9495">
 </head>
 <body class="bg1-img">
-<form action="<?php echo isset($_CORE['url'])?($_CORE['url']):(""); ?>" method="post" onsubmit="return check_sid(this);">
+<form action="index.php?mod=user&action=login" method="post" onsubmit="return check_sid(this);">
     <table width="100%" height="100%">
         <tr>
             <td colspan="2" height="20%" class="header_logo">
@@ -52,11 +52,11 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
         <tr>
             <td colspan="2" class="login_explain">
                 提示
-                <hr size="1" color="<?php echo isset($_CORE['style_color1'])?($_CORE['style_color1']):(""); ?>">
+                <hr size="1" color="#793c65">
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="color: <?php echo isset($_CORE['style_color1'])?($_CORE['style_color1']):(""); ?>; font-family: 'Times New Roman', '宋体'">
+            <td colspan="2" style="color: #793c65; font-family: 'Times New Roman', '宋体'">
                 1.如果您没有设置密码或者忘记密码，请输入任意密码登录；<br>
                 2.通过学生邮箱验证后，密码将被更改为您输入的密码。
             </td>

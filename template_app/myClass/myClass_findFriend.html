@@ -3,49 +3,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>我的课程</title>
+    <title>会友广场</title>
     <link rel="stylesheet" href="./template_app/css/love_reg.css?r={rand}">
     <link rel="stylesheet" href="./template_app/css/rankList_class.css?r={rand}">
 </head>
 <body>
 <!--{template app/rankList_class:common_header}-->
-<h1 class="Reg_title">
-    我的课程
-</h1>
-{if db_count($classList) == 0}
-<div class="card3">你还没有加入任何课程</div>
+<div class="nav_row">
+    <a href="index.php?mod=user&action=profile&uid={$_G['user']['uid']}">
+        <img src="{$_G['user']['profile']['avatar']}" class="avatar_small">
+    </a>
+    <a href="index.php?mod=myClass&action=findFriend"
+       class="nav_btn_chosen">
+        会友广场
+    </a>
+    <a href="index.php?mod=myClass&action=addFindFriend"
+       class="nav_btn">
+        发起会友
+    </a>
+    <a href="index.php?mod=myClass&action=myFindFriend"
+       class="nav_btn">
+        我的会友
+    </a>
+</div>
+<br>
+<br>
+
+{if db_count($findFriendList) == 0}
+<div class="card3">还没有人发起会友</div>
 {else}
-<loop $classList row_var $class>
-    <var classinfo>get_classinfo($class['cid'])</var>
-    <div class="card3" style="text-align: left" id="class_{$classinfo['classid']}">
+<loop $findFriendList row_var $findFriend>
+    <var classinfo>get_classinfo($findFriend['classnum'])</var>
+    <div class="card3" style="text-align: left" id="findFriend_{$findFriend['ffid']}">
         <p class="classlist-titlenav">
             <span class="classlist-title"><var>classinfo['name']</var></span>
         <hr size="1" color="#793c65">
         </p>
         <div class="classlist-introduction">
-            <p>课程号: <var>classinfo['num']</var>(<var>classinfo['credits']</var>学分)</p>
-            <p>授课老师: <var>classinfo['teacher']</var></p>
-            <p style="padding-top: 6px">
-                <a href="index.php?mod=myClass&action=findFriend" class="classlist-link">课程交友</a>
-                {if !$classinfo['admin']}
-                <a href="javascript:;" class="classlist-link" onclick="ApplyAdmin('{$classinfo['classid']}', '{$classinfo['name']}')">申请课程管理员</a>
-                {elseif $classinfo['admin'] == $_G['user']['uid']}
-                <a href="javascript:;" class="classlist-link">详情</a>
-                {/if}
-                {if $classinfo['forum']}
-                <a href="index.php?mod=nju_docs&action=communication&fid={$classinfo['forum']}" class="classlist-link">进入讨论区</a>
-                {/if}
-                {if $classinfo['docs']}
-                <a href="index.php?mod=nju_docs&action=docs&father={$classinfo['docs']}" class="classlist-link">课程资料</a>
-                {/if}
-                {if $class['subscribe'] == 0}
-                <a id="subscribe_{$classinfo['classid']}" href="javascript:;" class="classlist-link" onclick="SubscribeClass('{$classinfo['classid']}', '{$classinfo['name']}');">订阅课程通知</a>
-                {/if}
-                <a href="javascript:;" class="classlist-link" onclick="ExitClass('{$classinfo['classid']}', '{$classinfo['name']}');">退出课程</a>
-            </p>
+            <p>课程号: <var>classinfo['num']</var></p>
+            <table width="100%">
+                <tr>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        姓名
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        性别
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        年级
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        院系
+                    </td>
+                </tr>
+                <div>
+                    <tr>
+                        <td style="border-bottom: 1px dashed #793c65" align="center">
+                            {$findFriend['uname']}
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            {$getSex[$findFriend['gender']]}
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            {$findFriend['grade']}
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            {$findFriend['department']}
+                        </td>
+                    </tr>
+                </div>
+                <div style="padding: 5px; border: 1px dashed #793c65">
+                    <func str_ireplace>'\r\n', '<br>', $findFriend['intro']</func>
+                </div>
+            </table>
+            <div class="card2_btn" onclick="location.href='index.php?mod=user&action=profile&uid=' + {$findFriend['uid']}">
+                查看ta的个人页面
+            </div>
         </div>
     </div>
 </loop>
+
 {/if}
 <br>
 <br>

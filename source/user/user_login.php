@@ -44,7 +44,8 @@ if (isset($_POST["pwd"])
                 'name'=>"NJUer",
                 'pwd'=>md5(rand(1,999999).time()),
                 'mobile'=>$_POST["uid"],
-                'salt'=>$salt
+                'salt'=>$salt,
+                'style'=>'nju2021'
             ), 1);
 
         }

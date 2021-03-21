@@ -85,10 +85,10 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <br>
 <br>
 </body>
-<script src="static/js/common_post_image.js?r=4195"></script>
-<script src="static/js/square_dingli_post.js?r=4195"></script>
-<script src="static/js/square_dingli_loading.js?r=4195"></script>
-<script src="static/js/square_dingli_operation.js?r=4195"></script>
+<script src="static/js/common_post_image.js?r=6467"></script>
+<script src="static/js/square_dingli_post.js?r=6467"></script>
+<script src="static/js/square_dingli_loading.js?r=6467"></script>
+<script src="static/js/square_dingli_operation.js?r=6467"></script>
 <?php if($_GET['do'] != "Wri"){ ?>
 <script>
     square_DingLiList("type=<?php echo isset($_GET['do'])?($_GET['do']):(""); ?>&class=<?php echo isset($_GET['class'])?($_GET['class']):(""); ?>&keyword=" + encodeURIComponent("<?php echo isset($_GET['keyword'])?($_GET['keyword']):(""); ?>"));

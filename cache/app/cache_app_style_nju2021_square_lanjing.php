@@ -53,7 +53,7 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <br>
 </body>
 <?php if($_GET['do'] == 'Message'){ ?>
-<script src="static/js/GetMessage.js?r=2747"></script>
+<script src="static/js/GetMessage.js?r=6574"></script>
 <script>
     var ws;
     var lockReconnect = false;

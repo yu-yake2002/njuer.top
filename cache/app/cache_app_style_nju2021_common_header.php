@@ -1,15 +1,15 @@
 <?php /*自动生成的模板文件_*/
 if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
-<link rel="stylesheet" href="./template_app/css/jquery-weui.min.css?r=3124">
-<link rel="stylesheet" href="./template_app/css/weui.min.css?r=3124">
-<link rel="stylesheet" href="./template_app/style/nju2021/css/common.css?r=3124">
-<link rel="stylesheet" href="./template_app/style/nju2021/css/common_card.css?r=3124">
+<link rel="stylesheet" href="./template_app/css/jquery-weui.min.css?r=201">
+<link rel="stylesheet" href="./template_app/css/weui.min.css?r=201">
+<link rel="stylesheet" href="./template_app/style/nju2021/css/common.css?r=201">
+<link rel="stylesheet" href="./template_app/style/nju2021/css/common_card.css?r=201">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<script src="./static/js/jquery.min.js?r=3124"></script>
-<script src="./static/js/jquery-weui.min.js?r=3124"></script>
-<script src="./static/js/weui.min.js?r=3124"></script>
-<script src="./static/js/common.js?r=3124"></script>
-<script src="./static/js/common_credits.js?r=3124"></script>
+<script src="./static/js/jquery.min.js?r=201"></script>
+<script src="./static/js/jquery-weui.min.js?r=201"></script>
+<script src="./static/js/weui.min.js?r=201"></script>
+<script src="./static/js/common.js?r=201"></script>
+<script src="./static/js/common_credits.js?r=201"></script>
 <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"

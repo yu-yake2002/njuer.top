@@ -26,7 +26,7 @@ function UserisMobile()
     }
 }
 
-$_CORE["url"] = "https://".$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$_CORE["url"] = "http://".$_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $_CORE["uri"] = $_SERVER['REQUEST_URI'];
 $_CORE['isMobile'] = UserisMobile();
 

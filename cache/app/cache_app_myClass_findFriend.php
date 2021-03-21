@@ -5,54 +5,91 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>南小宝 - 我的课程</title>
-    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=3297">
-    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r=3297">
+    <title>南小宝 - 会友广场</title>
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=2252">
+    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r=2252">
 </head>
 <body>
 <?php include template("app/rankList_class:common_header"); ?>
-<h1 class="Reg_title">
-    我的课程
-</h1>
-<?php if(db_count($classList) == 0){ ?>
-<div class="card3">你还没有加入任何课程</div>
+<div class="nav_row">
+    <a href="index.php?mod=user&action=profile&uid=<?php echo isset($_G['user']['uid'])?($_G['user']['uid']):(""); ?>">
+        <img src="<?php echo isset($_G['user']['profile']['avatar'])?($_G['user']['profile']['avatar']):(""); ?>" class="avatar_small">
+    </a>
+    <a href="index.php?mod=myClass&action=findFriend"
+       class="nav_btn_chosen">
+        会友广场
+    </a>
+    <a href="index.php?mod=myClass&action=addFindFriend"
+       class="nav_btn">
+        发起会友
+    </a>
+    <a href="index.php?mod=myClass&action=myFindFriend"
+       class="nav_btn">
+        我的会友
+    </a>
+</div>
+<br>
+<br>
+
+<?php if(db_count($findFriendList) == 0){ ?>
+<div class="card3">还没有人发起会友</div>
 <?php }else{ ?>
-<?php while($class = db_fetch($classList)){ ?>
-    <?php $classinfo = get_classinfo($class['cid']); ?>
-    <div class="card3" style="text-align: left" id="class_<?php echo isset($classinfo['classid'])?($classinfo['classid']):(""); ?>">
+<?php while($findFriend = db_fetch($findFriendList)){ ?>
+    <?php $classinfo = get_classinfo($findFriend['classnum']); ?>
+    <div class="card3" style="text-align: left" id="findFriend_<?php echo isset($findFriend['ffid'])?($findFriend['ffid']):(""); ?>">
         <p class="classlist-titlenav">
             <span class="classlist-title"><?php echo isset($classinfo['name'])?($classinfo['name']):("var[classinfo['name']]"); ?></span>
         <hr size="1" color="#793c65">
         </p>
         <div class="classlist-introduction">
-            <p>课程号: <?php echo isset($classinfo['num'])?($classinfo['num']):("var[classinfo['num']]"); ?>(<?php echo isset($classinfo['credits'])?($classinfo['credits']):("var[classinfo['credits']]"); ?>学分)</p>
-            <p>授课老师: <?php echo isset($classinfo['teacher'])?($classinfo['teacher']):("var[classinfo['teacher']]"); ?></p>
-            <p style="padding-top: 6px">
-                <a href="index.php?mod=myClass&action=findFriend" class="classlist-link">课程交友</a>
-                <?php if(!$classinfo['admin']){ ?>
-                <a href="javascript:;" class="classlist-link" onclick="ApplyAdmin('<?php echo isset($classinfo['classid'])?($classinfo['classid']):(""); ?>', '<?php echo isset($classinfo['name'])?($classinfo['name']):(""); ?>')">申请课程管理员</a>
-                <?php }elseif($classinfo['admin'] == $_G['user']['uid']){ ?>
-                <a href="javascript:;" class="classlist-link">详情</a>
-                <?php } ?>
-                <?php if($classinfo['forum']){ ?>
-                <a href="index.php?mod=nju_docs&action=communication&fid=<?php echo isset($classinfo['forum'])?($classinfo['forum']):(""); ?>" class="classlist-link">进入讨论区</a>
-                <?php } ?>
-                <?php if($classinfo['docs']){ ?>
-                <a href="index.php?mod=nju_docs&action=docs&father=<?php echo isset($classinfo['docs'])?($classinfo['docs']):(""); ?>" class="classlist-link">课程资料</a>
-                <?php } ?>
-                <?php if($class['subscribe'] == 0){ ?>
-                <a id="subscribe_<?php echo isset($classinfo['classid'])?($classinfo['classid']):(""); ?>" href="javascript:;" class="classlist-link" onclick="SubscribeClass('<?php echo isset($classinfo['classid'])?($classinfo['classid']):(""); ?>', '<?php echo isset($classinfo['name'])?($classinfo['name']):(""); ?>');">订阅课程通知</a>
-                <?php } ?>
-                <a href="javascript:;" class="classlist-link" onclick="ExitClass('<?php echo isset($classinfo['classid'])?($classinfo['classid']):(""); ?>', '<?php echo isset($classinfo['name'])?($classinfo['name']):(""); ?>');">退出课程</a>
-            </p>
+            <p>课程号: <?php echo isset($classinfo['num'])?($classinfo['num']):("var[classinfo['num']]"); ?></p>
+            <table width="100%">
+                <tr>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        姓名
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        性别
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        年级
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        院系
+                    </td>
+                </tr>
+                <div>
+                    <tr>
+                        <td style="border-bottom: 1px dashed #793c65" align="center">
+                            <?php echo isset($findFriend['uname'])?($findFriend['uname']):(""); ?>
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            <?php echo isset($getSex[$findFriend['gender']])?($getSex[$findFriend['gender']]):(""); ?>
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            <?php echo isset($findFriend['grade'])?($findFriend['grade']):(""); ?>
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            <?php echo isset($findFriend['department'])?($findFriend['department']):(""); ?>
+                        </td>
+                    </tr>
+                </div>
+                <div style="padding: 5px; border: 1px dashed #793c65">
+                    <?php echo str_ireplace('\r\n', '<br>', $findFriend['intro']); ?>
+                </div>
+            </table>
+            <div class="card2_btn" onclick="location.href='index.php?mod=user&action=profile&uid=' + <?php echo isset($findFriend['uid'])?($findFriend['uid']):(""); ?>">
+                查看ta的个人页面
+            </div>
         </div>
     </div>
 <?php } ?>
+
 <?php } ?>
 <br>
 <br>
 <br>
 <br>
 </body>
-<script src="static/js/class_join.js?r=3297"></script>
+<script src="static/js/class_join.js?r=2252"></script>
 </html>

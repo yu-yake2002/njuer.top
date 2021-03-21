@@ -5,7 +5,7 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <head>
     <meta charset="UTF-8">
     <title>南小宝 - 聊天界面</title>
-    <link rel="stylesheet" href="./template_app/css/user_message.css?r=2007">
+    <link rel="stylesheet" href="./template_app/css/user_message.css?r=2275">
     <script>
         var message_start = 0;
         var message_stop = 0;
@@ -26,7 +26,7 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
     <input type="submit" class="post_message_btn" value="发送" onclick="post_message(<?php echo isset($group['gid'])?($group['gid']):(""); ?>);">
 </div>
 </body>
-<script src="static/js/user_room.js?r=2007"></script>
+<script src="static/js/user_room.js?r=2275"></script>
 <script>
     loading_message(<?php echo isset($group['gid'])?($group['gid']):(""); ?>);
 </script>

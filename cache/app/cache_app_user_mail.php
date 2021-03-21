@@ -8,10 +8,10 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
             content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <title>南小宝 - 登录界面</title>
-    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/jquery-weui.min.css?r=4725">
-    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/weui.min.css?r=4725">
-    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/user_login.css?r=4725">
-    <link rel="stylesheet" href="./template_app/css<?php echo isset($_CORE['style_css'])?($_CORE['style_css']):("var[_CORE['style_css']]"); ?>/common.css?r=4725">
+    <link rel="stylesheet" href="./template_app/css/jquery-weui.min.css?r=522">
+    <link rel="stylesheet" href="./template_app/css/weui.min.css?r=522">
+    <link rel="stylesheet" href="./template_app/css/user_login.css?r=522">
+    <link rel="stylesheet" href="./template_app/css/common.css?r=522">
 </head>
 <body class="bg1-img">
 <form action="<?php echo isset($_CORE['url'])?($_CORE['url']):(""); ?>" method="post" onsubmit="return check_sid(this);" autocomplete="off">
@@ -61,9 +61,9 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
     </table>
 </form>
 </body>
-<script src="./static/js/jquery.min.js?r=4725"></script>
-<script src="./static/js/jquery-weui.min.js?r=4725"></script>
-<script src="./static/js/weui.min.js?r=4725"></script>
+<script src="./static/js/jquery.min.js?r=522"></script>
+<script src="./static/js/jquery-weui.min.js?r=522"></script>
+<script src="./static/js/weui.min.js?r=522"></script>
 <script>
     document.getElementById("code1").focus();
     function code1input() {

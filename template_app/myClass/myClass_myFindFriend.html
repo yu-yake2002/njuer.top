@@ -1,0 +1,89 @@
+<!--{template app/common:header}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>会友广场</title>
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r={rand}">
+    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r={rand}">
+</head>
+<body>
+<!--{template app/rankList_class:common_header}-->
+<div class="nav_row">
+    <a href="index.php?mod=user&action=profile&uid={$_G['user']['uid']}">
+        <img src="{$_G['user']['profile']['avatar']}" class="avatar_small">
+    </a>
+    <a href="index.php?mod=myClass&action=findFriend"
+       class="nav_btn">
+        会友广场
+    </a>
+    <a href="index.php?mod=myClass&action=addFindFriend"
+       class="nav_btn">
+        发起会友
+    </a>
+    <a href="index.php?mod=myClass&action=myFindFriend"
+       class="nav_btn_chosen">
+        我的会友
+    </a>
+</div>
+<br>
+<br>
+
+{if db_count($myFindFriendList) == 0}
+<div class="card3">你还没有发起/参与会友</div>
+{else}
+<loop $myFindFriendList row_var $myFindFriend>
+    <var classinfo>get_classinfo($myFindFriend['classnum'])</var>
+    <div class="card3" style="text-align: left" id="class_{$myFindFriend['ffid']}">
+        <p class="classlist-titlenav">
+            <span class="classlist-title"><var>classinfo['name']</var></span>
+        <hr size="1" color="#793c65">
+        </p>
+        <div class="classlist-introduction">
+            <p>课程号: <var>classinfo['num']</var></p>
+            <table width="100%">
+                <tr>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        姓名
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        性别
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        年级
+                    </td>
+                    <td style="border-bottom: 1px dashed #793c65" align="center">
+                        院系
+                    </td>
+                </tr>
+                <div>
+                    <tr>
+                        <td style="border-bottom: 1px dashed #793c65" align="center">
+                            {$myFindFriend['uname']}
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            {$mySex[$myFindFriend['gender']]}
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            {$myFindFriend['grade']}
+                        </td>
+                        <td style="border-bottom: 1px dashed #793c65" align="center" >
+                            {$myFindFriend['department']}
+                        </td>
+                    </tr>
+                </div>
+                <div style="padding: 5px; border: 1px dashed #793c65">
+                    <func str_ireplace>'\r\n', '<br>', $myFindFriend['intro']</func>
+                </div>
+            </table>
+        </div>
+    </div>
+</loop>
+
+{/if}
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>
