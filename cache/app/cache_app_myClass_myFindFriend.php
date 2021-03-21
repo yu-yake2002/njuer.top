@@ -6,8 +6,8 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <head>
     <meta charset="UTF-8">
     <title>南小宝 - 会友广场</title>
-    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=7154">
-    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r=7154">
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=9359">
+    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r=9359">
 </head>
 <body>
 <?php include template("app/rankList_class:common_header"); ?>

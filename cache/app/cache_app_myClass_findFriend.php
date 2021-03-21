@@ -6,8 +6,8 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <head>
     <meta charset="UTF-8">
     <title>南小宝 - 会友广场</title>
-    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=2252">
-    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r=2252">
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=1279">
+    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r=1279">
 </head>
 <body>
 <?php include template("app/rankList_class:common_header"); ?>
@@ -91,5 +91,5 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <br>
 <br>
 </body>
-<script src="static/js/class_join.js?r=2252"></script>
+<script src="static/js/class_join.js?r=1279"></script>
 </html>

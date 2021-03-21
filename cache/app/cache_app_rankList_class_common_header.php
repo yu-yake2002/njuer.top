@@ -1,18 +1,18 @@
 <?php /*自动生成的模板文件_*/
 if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
-<link rel="stylesheet" href="./template_app/css/square.css?r=8449">
-<link rel="stylesheet" href="./template_app/css/rankList_class.css?r=8449">
+<link rel="stylesheet" href="./template_app/css/square.css?r=756">
+<link rel="stylesheet" href="./template_app/css/rankList_class.css?r=756">
 
 <table width="80%" align="center" style="margin: 0 auto" class="footmenu_list">
     <tr>
         <td align="center" width="33%" onclick="location.href='index.php?mod=rankList_class&r=<?php echo rand(1,50); ?>';">
-            <img src="static/img/class_foot_logo1.png?r=8449" class="footmenu_item">
+            <img src="static/img/class_foot_logo1.png?r=756" class="footmenu_item">
         </td>
         <td align="center" width="33%" onclick="location.href='index.php?mod=myClass&r=<?php echo rand(1,50); ?>';">
-            <img src="static/img/class_foot_logo2.png?r=8449" class="footmenu_item">
+            <img src="static/img/class_foot_logo2.png?r=756" class="footmenu_item">
         </td>
         <td align="center" width="33%" onclick="location.href='index.php?mod=nju_docs&r=<?php echo rand(1,50); ?>';">
-            <img src="static/img/class_foot_logo3.png?r=8449" class="footmenu_item">
+            <img src="static/img/class_foot_logo3.png?r=756" class="footmenu_item">
         </td>
     </tr>
     <tr>
