@@ -1,18 +1,18 @@
 <?php /*自动生成的模板文件_*/
 if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
-<link rel="stylesheet" href="./template_app/css/square.css?r=7470">
+<link rel="stylesheet" href="./template_app/css/square.css?r=8779">
 
 <table width="80%" align="center" style="margin: 0 auto" class="footmenu_list">
     <tr>
         <td align="center" width="33%" onclick="location.href='index.php?mod=square&action=dingli&r=<?php echo rand(1,50); ?>';">
-            <img src="static/img/dingli.png?r=7470" class="footmenu_item<?php if($_GET['action'] == 'dingli'){ ?>_chosen<?php } ?>">
+            <img src="static/img/dingli.png?r=8779" class="footmenu_item<?php if($_GET['action'] == 'dingli'){ ?>_chosen<?php } ?>">
         </td>
         <td align="center" width="33%" onclick="location.href='index.php?mod=square&action=match&r=<?php echo rand(1,50); ?>';">
-            <img src="static/img/youyue.png?r=7470" class="footmenu_item<?php if($_GET['action'] == 'match'){ ?>_chosen<?php } ?>">
+            <img src="static/img/youyue.png?r=8779" class="footmenu_item<?php if($_GET['action'] == 'match'){ ?>_chosen<?php } ?>">
             <?php if($_G['user']['new_mail'] > 0){ ?><span class="new_message" style="font-size: 8px; float: left; position: absolute">New</span><?php } ?>
         </td>
         <td align="center" width="33%" onclick="location.href='index.php?mod=square&action=lanjing&r=<?php echo rand(1,50); ?>';">
-            <img src="static/img/lanjing.png?r=7470" class="footmenu_item<?php if($_GET['action'] == 'lanjing'){ ?>_chosen<?php } ?>">
+            <img src="static/img/lanjing.png?r=8779" class="footmenu_item<?php if($_GET['action'] == 'lanjing'){ ?>_chosen<?php } ?>">
             <?php if($_G['user']['new_message']){ ?><span class="new_message" style="font-size: 8px; float: left; position: absolute">New</span><?php } ?>
         </td>
     </tr>

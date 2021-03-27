@@ -11,7 +11,7 @@ if(!defined("IS_INCLUDED"))
 }
 
 function get_classinfo($cid){
-    return db_fetch(db_query("SELECT * FROM class_common WHERE num = $cid"));
+    return db_fetch(db_query("SELECT * FROM class_common WHERE classid = $cid"));
 }
 
 $mySex = array(

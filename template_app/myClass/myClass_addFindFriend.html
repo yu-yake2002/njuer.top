@@ -30,11 +30,11 @@
     </h1>
     <div class="addOut_field">
         <div class="addOut_field_label">课程</div>
-        <select class="addOut_field_input" name="classnum">
+        <select class="addOut_field_input" name="cid">
             <loop $classList row_var $class>
                 <var classinfo>get_classinfo($class['cid'])</var>
                 {if $classinfo['classtype'] == 4 || $classinfo['classtype'] == 5 || $classinfo['classtype'] == 7}
-                <option value = <var>classinfo['num']</var>><var>classinfo['name']</var>(<var>classinfo['num']</var>)</option>
+                <option value = <var>classinfo['classid']</var>><var>classinfo['name']</var>(<var>classinfo['num']</var>)</option>
                 {/if}
             </loop>
         </select>

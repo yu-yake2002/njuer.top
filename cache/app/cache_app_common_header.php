@@ -1,18 +1,18 @@
 <?php /*自动生成的模板文件_*/
 if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
-<link rel="stylesheet" href="./template_app/css/jquery-weui.min.css?r=6989">
-<link rel="stylesheet" href="./template_app/css/weui.min.css?r=6989">
-<link rel="stylesheet" href="./template_app/css/common.css?r=6989">
-<link rel="stylesheet" href="./template_app/css/common_card.css?r=6989">
+<link rel="stylesheet" href="./template_app/css/jquery-weui.min.css?r=5519">
+<link rel="stylesheet" href="./template_app/css/weui.min.css?r=5519">
+<link rel="stylesheet" href="./template_app/css/common.css?r=5519">
+<link rel="stylesheet" href="./template_app/css/common_card.css?r=5519">
 <?php if($_GET['mod'] != 'user'){ ?>
-<link rel="stylesheet" href="./template_app/css/rankList_class.css?r=6989">
+<link rel="stylesheet" href="./template_app/css/rankList_class.css?r=5519">
 <?php } ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-<script src="./static/js/jquery.min.js?r=6989"></script>
-<script src="./static/js/jquery-weui.min.js?r=6989"></script>
-<script src="./static/js/weui.min.js?r=6989"></script>
-<script src="./static/js/common.js?r=6989"></script>
-<script src="./static/js/common_credits.js?r=6989"></script>
+<script src="./static/js/jquery.min.js?r=5519"></script>
+<script src="./static/js/jquery-weui.min.js?r=5519"></script>
+<script src="./static/js/weui.min.js?r=5519"></script>
+<script src="./static/js/common.js?r=5519"></script>
+<script src="./static/js/common_credits.js?r=5519"></script>
 <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"

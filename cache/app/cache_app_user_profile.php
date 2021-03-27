@@ -9,7 +9,7 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>南小宝 - <?php echo isset($user['common']['name'])?($user['common']['name']):("var[user['common']['name']]"); ?> - <?php echo isset($user['profile']['words'])?($user['profile']['words']):("var[user['profile']['words']]"); ?></title>
     <link href="https://cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
-    <link href="template_app/css/home.css?r=7821" rel="stylesheet" />
+    <link href="template_app/css/home.css?r=4245" rel="stylesheet" />
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 </head>
@@ -571,9 +571,9 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 </div>
 <?php } ?>
 </body>
-<script src="static/js/common_post_image.js?r=7821"></script>
-<script src="static/js/home_attention.js?r=7821"></script>
-<script src="static/js/home_settings.js?r=7821"></script>
+<script src="static/js/common_post_image.js?r=4245"></script>
+<script src="static/js/home_attention.js?r=4245"></script>
+<script src="static/js/home_settings.js?r=4245"></script>
 <script>
     $('.gallery').magnificPopup({
         delegate: 'a',

@@ -2,7 +2,7 @@
 
 /*
  * Copyright By 南小宝
- * Last Edited: 20200905, By 张运筹
+ * Last Edited: 20210320, By 孙际儒
  */
 
 if(!defined("IS_INCLUDED"))
@@ -17,14 +17,16 @@ function get_classinfo($cid){
 $classList = db_query("SELECT cid, subscribe FROM class_user WHERE uid = {$_G['user']['uid']} AND (state = 1 OR state = 2) ORDER BY `time` DESC");
 
 if(isset($_POST["contents"])){
+    $classinfo = get_classinfo($_POST["cid"]);
     db_insert("class_findfriend",array(
-        'classnum' => $_POST["classnum"],
+        'classname' => $classinfo["name"],
+        'cid' => $_POST["cid"],
         'uid' => $_G['user']['uid'],
-        'uname' => $_POST["uname"],
+        'uname' => $_POST["uname"]?$_POST["uname"]:"匿名",
         'intro' => $_POST["contents"],
         'gender' => $_POST["sex"],
-        'grade' => $_POST["grade"],
-        'department' => $_POST["department"]
+        'grade' => $_POST["grade"]?$_POST["grade"]:"保密",
+        'department' => $_POST["department"]?$_POST["department"]:"保密"
     ));
     CORE_GOTOURL("index.php?mod=myClass&action=findFriend");
 }

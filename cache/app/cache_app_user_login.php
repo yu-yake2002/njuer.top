@@ -5,7 +5,7 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <html lang="en">
 <head>
     <title>南小宝 - 登录界面</title>
-    <link rel="stylesheet" href="./template_app/css/user_login.css?r=7424">
+    <link rel="stylesheet" href="./template_app/css/user_login.css?r=4432">
 </head>
 <body class="bg1-img">
 <form action="index.php?mod=user&action=login" method="post" onsubmit="return check_sid(this);">

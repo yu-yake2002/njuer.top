@@ -30,10 +30,10 @@
 <br>
 
 {if db_count($findFriendList) == 0}
-<div class="card3">还没有人发起会友</div>
+<div class="card3">你所加入的通识/公选课还没有人发起会友</div>
 {else}
 <loop $findFriendList row_var $findFriend>
-    <var classinfo>get_classinfo($findFriend['classnum'])</var>
+    <var classinfo>get_classinfo($findFriend['cid'])</var>
     <div class="card3" style="text-align: left" id="findFriend_{$findFriend['ffid']}">
         <p class="classlist-titlenav">
             <span class="classlist-title"><var>classinfo['name']</var></span>

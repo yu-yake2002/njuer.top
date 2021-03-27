@@ -6,8 +6,8 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <head>
     <meta charset="UTF-8">
     <title>南小宝 - 会友广场</title>
-    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=2120">
-    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r=2120">
+    <link rel="stylesheet" href="./template_app/css/love_reg.css?r=2245">
+    <link rel="stylesheet" href="./template_app/css/rankList_class.css?r=2245">
 </head>
 <body>
 <?php include template("app/rankList_class:common_header"); ?>
@@ -32,10 +32,10 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <br>
 
 <?php if(db_count($findFriendList) == 0){ ?>
-<div class="card3">还没有人发起会友</div>
+<div class="card3">你所加入的通识/公选课还没有人发起会友</div>
 <?php }else{ ?>
 <?php while($findFriend = db_fetch($findFriendList)){ ?>
-    <?php $classinfo = get_classinfo($findFriend['classnum']); ?>
+    <?php $classinfo = get_classinfo($findFriend['cid']); ?>
     <div class="card3" style="text-align: left" id="findFriend_<?php echo isset($findFriend['ffid'])?($findFriend['ffid']):(""); ?>">
         <p class="classlist-titlenav">
             <span class="classlist-title"><?php echo isset($classinfo['name'])?($classinfo['name']):("var[classinfo['name']]"); ?></span>
@@ -91,5 +91,5 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 <br>
 <br>
 </body>
-<script src="static/js/class_join.js?r=2120"></script>
+<script src="static/js/class_join.js?r=2245"></script>
 </html>

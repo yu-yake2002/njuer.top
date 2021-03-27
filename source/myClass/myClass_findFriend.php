@@ -10,11 +10,13 @@ if(!defined("IS_INCLUDED"))
     die('Access denied!');
 }
 
-function get_classinfo($classnum){
-    return db_fetch(db_query("SELECT * FROM class_common WHERE num = $classnum"));
+function get_classinfo($cid){
+    return db_fetch(db_query("SELECT * FROM class_common WHERE classid = $cid"));
 }
 
-$findFriendList = db_query("SELECT * FROM class_findfriend ORDER BY `ffid` DESC");
+$classList = db_query("SELECT cid, subscribe FROM class_user WHERE uid = {$_G['user']['uid']} AND (state = 1 OR state = 2) ORDER BY `time` DESC");
+$findFriendList = db_query("SELECT * FROM class_findfriend WHERE cid IN (SELECT cid FROM class_user WHERE uid = {$_G['user']['uid']} AND (state = 1 OR state = 2)) ORDER BY `ffid` DESC");
+
 
 $getSex = array(
     '',

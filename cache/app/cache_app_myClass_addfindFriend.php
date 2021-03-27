@@ -8,7 +8,7 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
 </head>
 <body>
 <?php include template("app/square:common_header"); ?>
-<link rel="stylesheet" href="./template_app/css/square_match_out.css?r=1494">
+<link rel="stylesheet" href="./template_app/css/square_match_out.css?r=7175">
 <div class="nav_row">
     <a href="index.php?mod=user&action=profile&uid=<?php echo isset($_G['user']['uid'])?($_G['user']['uid']):(""); ?>">
         <img src="<?php echo isset($_G['user']['profile']['avatar'])?($_G['user']['profile']['avatar']):(""); ?>" class="avatar_small">
@@ -32,11 +32,11 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
     </h1>
     <div class="addOut_field">
         <div class="addOut_field_label">课程</div>
-        <select class="addOut_field_input" name="classnum">
+        <select class="addOut_field_input" name="cid">
             <?php while($class = db_fetch($classList)){ ?>
                 <?php $classinfo = get_classinfo($class['cid']); ?>
                 <?php if($classinfo['classtype'] == 4 || $classinfo['classtype'] == 5 || $classinfo['classtype'] == 7){ ?>
-                <option value = <?php echo isset($classinfo['num'])?($classinfo['num']):("var[classinfo['num']]"); ?>><?php echo isset($classinfo['name'])?($classinfo['name']):("var[classinfo['name']]"); ?>(<?php echo isset($classinfo['num'])?($classinfo['num']):("var[classinfo['num']]"); ?>)</option>
+                <option value = <?php echo isset($classinfo['classid'])?($classinfo['classid']):("var[classinfo['classid']]"); ?>><?php echo isset($classinfo['name'])?($classinfo['name']):("var[classinfo['name']]"); ?>(<?php echo isset($classinfo['num'])?($classinfo['num']):("var[classinfo['num']]"); ?>)</option>
                 <?php } ?>
             <?php } ?>
         </select>
