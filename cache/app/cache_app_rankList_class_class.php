@@ -173,9 +173,9 @@ if(!defined("IS_INCLUDED")) die('Access denied!'); ?>
         return ;
     }
 </script>
-<script src="static/js/class_remark.js?r=283"></script>
-<script src="static/js/class_join.js?r=283"></script>
-<script src="static/js/rankList_openclass.js?r=283"></script>
+<script src="static/js/class_remark.js?r=1930"></script>
+<script src="static/js/class_join.js?r=1930"></script>
+<script src="static/js/rankList_openclass.js?r=1930"></script>
 <script>
 
     var searchtype = [0,0,0,0,0,0,0];
